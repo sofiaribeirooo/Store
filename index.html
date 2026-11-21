@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEXUS STORE — Loja Digital</title>
+<title>NEXUS STORE — Loja de Produtos Digitais e Contas</title>
+<meta name="description" content="NEXUS STORE — loja de produtos digitais e contas. Compra rápida, pagamento via PIX e entrega das credenciais direto na sua caixa de mensagens.">
 <style>
 :root{
   --preto:#050505;
@@ -35,7 +36,6 @@ body{
 ::-webkit-scrollbar-thumb{background:var(--vermelho-esc);border-radius:4px}
 ::-webkit-scrollbar-thumb:hover{background:var(--vermelho)}
 
-/* fundo animado */
 .bg-glow{
   position:fixed;inset:0;z-index:-1;pointer-events:none;
   background:
@@ -58,7 +58,7 @@ img{max-width:100%;display:block}
 @keyframes toastIn{from{opacity:0;transform:translateY(24px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes toastOut{to{opacity:0;transform:translateY(24px) scale(.95)}}
 
-/* ============ HEADER ============ */
+/* HEADER */
 .topbar{
   background:linear-gradient(90deg,var(--vermelho-esc),var(--vermelho),var(--vermelho-esc));
   background-size:200% 100%;
@@ -121,7 +121,7 @@ header{
 }
 .badge.show{display:grid}
 
-/* ============ HERO ============ */
+/* HERO */
 .hero{
   max-width:1280px;margin:0 auto;
   padding:90px 24px 70px;
@@ -143,9 +143,14 @@ header{
   margin-bottom:22px;animation:fadeUp .7s ease .1s both;
 }
 .hero h1 em{font-style:normal;color:var(--vermelho);text-shadow:0 0 40px rgba(225,11,11,.5)}
+.hero .hero-sub{
+  color:var(--cinza);font-size:1rem;line-height:1.6;
+  max-width:520px;margin-bottom:14px;font-weight:500;
+  animation:fadeUp .7s ease .18s both;
+}
 .hero p{
-  color:var(--cinza);font-size:1.05rem;line-height:1.7;
-  max-width:520px;margin-bottom:36px;animation:fadeUp .7s ease .2s both;
+  color:var(--cinza);font-size:1.02rem;line-height:1.7;
+  max-width:520px;margin-bottom:36px;animation:fadeUp .7s ease .24s both;
 }
 .hero-btns{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .7s ease .3s both}
 
@@ -171,11 +176,7 @@ header{
 .btn-secundario:hover{border-color:var(--branco);transform:translateY(-3px)}
 .btn-block{width:100%}
 
-/* card 3D do hero */
-.hero-card{
-  perspective:1200px;
-  animation:fadeUp .8s ease .3s both;
-}
+.hero-card{perspective:1200px;animation:fadeUp .8s ease .3s both}
 .hero-card-inner{
   background:linear-gradient(150deg,var(--preto-3),var(--preto-2));
   border:1px solid var(--borda-2);
@@ -198,7 +199,7 @@ header{
 .hero-card-inner ul{list-style:none;display:grid;gap:16px;position:relative}
 .hero-card-inner li{
   display:flex;align-items:center;gap:14px;
-  font-size:.94rem;color:#e2e2e2;
+  font-size:.94rem;color:#e2e2e2;position:relative;
 }
 .hero-card-inner li::before{
   content:"";flex-shrink:0;
@@ -212,9 +213,8 @@ header{
   width:8px;height:4px;border-left:2px solid #fff;border-bottom:2px solid #fff;
   transform:rotate(-45deg);pointer-events:none;
 }
-.hero-card-inner li{position:relative}
 
-/* ============ SEÇÕES ============ */
+/* SEÇÕES */
 section{padding:80px 24px}
 .container{max-width:1280px;margin:0 auto}
 .titulo-secao{text-align:center;margin-bottom:56px}
@@ -228,7 +228,7 @@ section{padding:80px 24px}
 }
 .titulo-secao p{color:var(--cinza);margin-top:12px;font-size:.98rem}
 
-/* ============ PRODUTOS ============ */
+/* PRODUTOS */
 .grid-produtos{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(255px,1fr));
@@ -316,7 +316,7 @@ section{padding:80px 24px}
   animation:spin .8s linear infinite;
 }
 
-/* ============ COMO FUNCIONA ============ */
+/* STEPS */
 .steps{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;
 }
@@ -335,7 +335,7 @@ section{padding:80px 24px}
 .step h4{font-size:.95rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
 .step p{font-size:.85rem;color:var(--cinza);line-height:1.6}
 
-/* ============ FOOTER ============ */
+/* FOOTER */
 footer{
   border-top:1px solid var(--borda);
   padding:50px 24px 0;
@@ -346,7 +346,7 @@ footer{
   display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;
   padding-bottom:40px;
 }
-.footer-inner p{color:var(--cinza);font-size:.85rem;max-width:340px;margin-top:12px}
+.footer-inner p{color:var(--cinza);font-size:.85rem;max-width:340px;margin-top:12px;line-height:1.6}
 .footer-cols{display:flex;gap:60px;flex-wrap:wrap}
 .footer-cols h5{
   font-size:.75rem;text-transform:uppercase;letter-spacing:2px;
@@ -364,7 +364,7 @@ footer{
   display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
 }
 
-/* ============ OVERLAY + PAINÉIS ============ */
+/* OVERLAY + PAINÉIS */
 .overlay{
   position:fixed;inset:0;z-index:500;
   background:rgba(0,0,0,.7);backdrop-filter:blur(4px);
@@ -409,7 +409,7 @@ footer{
   flex-shrink:0;background:var(--preto-2);
 }
 
-/* ============ CARRINHO ============ */
+/* CARRINHO */
 .cart-items{display:flex;flex-direction:column;gap:14px}
 .cart-item{
   display:flex;gap:14px;padding:14px;
@@ -503,7 +503,7 @@ footer{
 .total-row span{font-size:.82rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--cinza);font-weight:700}
 .total-row strong{font-size:1.5rem;font-weight:900;color:#fff}
 
-/* ============ PEDIDOS / MENSAGENS ============ */
+/* PEDIDOS / MENSAGENS */
 .order-card{
   background:var(--preto-3);border:1px solid var(--borda);
   border-radius:14px;padding:18px;margin-bottom:14px;
@@ -545,7 +545,7 @@ footer{
 }
 .btn-ver:hover{transform:translateY(-2px);box-shadow:0 12px 26px -10px rgba(225,11,11,.9)}
 
-/* ============ CHAT ============ */
+/* CHAT */
 .chat-body{
   flex:1;overflow-y:auto;padding:20px;
   display:flex;flex-direction:column;gap:12px;
@@ -585,7 +585,7 @@ footer{
 }
 .chat-send:hover{transform:scale(1.05);box-shadow:0 10px 24px -8px rgba(225,11,11,.9)}
 
-/* ============ MODAL ENTREGA ============ */
+/* MODAL ENTREGA */
 .modal{
   position:fixed;inset:0;z-index:700;
   display:grid;place-items:center;padding:20px;
@@ -641,7 +641,7 @@ footer{
 }
 .delivery-msg p{font-size:.85rem;color:#dcdcdc;line-height:1.6}
 
-/* ============ TOAST ============ */
+/* TOAST */
 .toast-container{
   position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
   z-index:9000;display:flex;flex-direction:column;gap:10px;align-items:center;
@@ -659,7 +659,7 @@ footer{
 .toast.success{border-left-color:#2ee06a}
 .toast.error{border-left-color:var(--vermelho-2)}
 
-/* ============ FAB DÚVIDAS ============ */
+/* FAB */
 .fab{
   position:fixed;bottom:24px;right:24px;z-index:400;
   width:58px;height:58px;border-radius:50%;
@@ -672,7 +672,7 @@ footer{
 .fab:hover{transform:scale(1.1)}
 .fab .badge{top:-2px;right:-2px}
 
-/* ============ RESPONSIVO ============ */
+/* RESPONSIVO */
 @media (max-width:960px){
   .hero{grid-template-columns:1fr;padding-top:60px;gap:40px}
   .hero-card-inner{transform:none;animation:none}
@@ -692,9 +692,9 @@ footer{
 
 <div class="bg-glow"></div>
 
-<!-- ============ HEADER ============ -->
+<!-- HEADER -->
 <header>
-  <div class="topbar">Frete digital imediato &nbsp;•&nbsp; Suporte 24/7 &nbsp;•&nbsp; Pagamento via PIX</div>
+  <div class="topbar">NEXUS STORE • Produtos digitais e contas • Entrega imediata • Pagamento via PIX</div>
   <nav class="nav">
     <a href="#" class="logo">
       <span class="logo-mark">N</span>
@@ -736,11 +736,12 @@ footer{
 </header>
 
 <main>
-  <!-- ============ HERO ============ -->
+  <!-- HERO -->
   <section class="hero">
     <div>
-      <span class="hero-tag">Entrega automática</span>
-      <h1>As melhores <em>chaves digitais</em> do mercado.</h1>
+      <span class="hero-tag">Nexus Store • Digital</span>
+      <h1>Loja de <em>produtos digitais</em> e contas.</h1>
+      <p class="hero-sub">Chaves, licenças, assinaturas e contas premium com entrega rápida e segura.</p>
       <p>Compre, pague via PIX e receba suas credenciais direto na sua caixa de mensagens. Rápido, seguro e sem burocracia.</p>
       <div class="hero-btns">
         <a href="#produtos" class="btn btn-primario">Ver produtos</a>
@@ -750,7 +751,7 @@ footer{
 
     <div class="hero-card">
       <div class="hero-card-inner">
-        <h3>Por que a Nexus?</h3>
+        <h3>Por que a Nexus Store?</h3>
         <ul>
           <li>Entrega via mensagem após aprovação</li>
           <li>Suporte humano via chat integrado</li>
@@ -761,13 +762,13 @@ footer{
     </div>
   </section>
 
-  <!-- ============ PRODUTOS ============ -->
+  <!-- PRODUTOS -->
   <section id="produtos">
     <div class="container">
       <div class="titulo-secao">
         <span>Catálogo</span>
         <h2>Produtos disponíveis</h2>
-        <p>Escolha, adicione ao carrinho e finalize com PIX.</p>
+        <p>Produtos digitais e contas prontos para entrega.</p>
       </div>
       <div class="grid-produtos" id="produtosGrid">
         <div class="loading"><div class="spinner"></div></div>
@@ -775,7 +776,7 @@ footer{
     </div>
   </section>
 
-  <!-- ============ COMO FUNCIONA ============ -->
+  <!-- COMO FUNCIONA -->
   <section id="como-funciona">
     <div class="container">
       <div class="titulo-secao">
@@ -786,7 +787,7 @@ footer{
         <div class="step">
           <div class="step-num">01</div>
           <h4>Escolha o produto</h4>
-          <p>Navegue pelo catálogo e adicione os itens desejados ao carrinho.</p>
+          <p>Navegue pelo catálogo de produtos digitais e contas e adicione os itens ao carrinho.</p>
         </div>
         <div class="step">
           <div class="step-num">02</div>
@@ -807,7 +808,7 @@ footer{
     </div>
   </section>
 
-  <!-- ============ CONTATO ============ -->
+  <!-- CONTATO -->
   <section id="contato" style="padding-top:0">
     <div class="container">
       <div class="titulo-secao">
@@ -822,7 +823,7 @@ footer{
   </section>
 </main>
 
-<!-- ============ FOOTER ============ -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div>
@@ -830,7 +831,7 @@ footer{
         <span class="logo-mark" style="width:28px;height:28px">N</span>
         NEXUS<span>STORE</span>
       </a>
-      <p>Loja digital especializada em chaves, licenças e credenciais com entrega segura e suporte dedicado.</p>
+      <p>NEXUS STORE — loja de produtos digitais e contas. Chaves, licenças, assinaturas e contas premium com entrega segura e suporte dedicado.</p>
     </div>
     <div class="footer-cols">
       <div>
@@ -847,15 +848,15 @@ footer{
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2025 NEXUS STORE. Todos os direitos reservados.</span>
+    <span>© 2025 NEXUS STORE — Produtos digitais e contas. Todos os direitos reservados.</span>
     <span>Pagamentos via PIX • Suporte 24/7</span>
   </div>
 </footer>
 
-<!-- ============ OVERLAY ============ -->
+<!-- OVERLAY -->
 <div class="overlay" id="overlay"></div>
 
-<!-- ============ PAINEL CARRINHO ============ -->
+<!-- PAINEL CARRINHO -->
 <aside class="panel" id="cartPanel">
   <div class="panel-head">
     <h2>Carrinho <span>Nexus</span></h2>
@@ -865,7 +866,7 @@ footer{
   <div class="panel-foot" id="cartFoot"></div>
 </aside>
 
-<!-- ============ PAINEL MENSAGENS ============ -->
+<!-- PAINEL MENSAGENS -->
 <aside class="panel" id="messagesPanel">
   <div class="panel-head">
     <h2>Minhas <span>Mensagens</span></h2>
@@ -874,7 +875,7 @@ footer{
   <div class="panel-body" id="messagesBody"></div>
 </aside>
 
-<!-- ============ PAINEL CHAT ============ -->
+<!-- PAINEL CHAT -->
 <aside class="panel" id="chatPanel">
   <div class="panel-head">
     <h2>Suporte <span>Nexus</span></h2>
@@ -892,7 +893,7 @@ footer{
   </div>
 </aside>
 
-<!-- ============ MODAL ENTREGA ============ -->
+<!-- MODAL ENTREGA -->
 <div class="modal" id="deliveryModal">
   <div class="modal-card">
     <h2>Suas <span>credenciais</span></h2>
@@ -902,7 +903,7 @@ footer{
   </div>
 </div>
 
-<!-- ============ FAB DÚVIDAS ============ -->
+<!-- FAB -->
 <button class="fab" onclick="openChat()" title="Suporte">
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
@@ -916,7 +917,7 @@ footer{
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getDatabase, ref, onValue, push, set, update, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-/* ============ FIREBASE ============ */
+/* FIREBASE */
 const firebaseConfig = {
   apiKey: "AIzaSyBbbm-MXPmxWNDxPnuVU_Lu26DVYTi7QCQ",
   authDomain: "nexus-store-gg.firebaseapp.com",
@@ -928,7 +929,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-/* ============ CLIENTE ============ */
+/* CLIENTE */
 function getClienteId(){
   let id = localStorage.getItem('nexusClienteId');
   if (!id){
@@ -939,7 +940,7 @@ function getClienteId(){
 }
 const CLIENTE_ID = getClienteId();
 
-/* ============ UTIL ============ */
+/* UTIL */
 const $ = id => document.getElementById(id);
 function escapeHtml(s){
   if (s == null) return '';
@@ -967,7 +968,7 @@ function attachTilt(el){
   el.addEventListener('mouseleave', () => { el.style.transform = ''; });
 }
 
-/* ============ ESTADO ============ */
+/* ESTADO */
 let produtos = [];
 let pixList = [];
 let cart = [];
@@ -980,7 +981,7 @@ if (!Array.isArray(cart)) cart = [];
 
 function saveCart(){ localStorage.setItem('nexusCart', JSON.stringify(cart)); }
 
-/* ============ RENDER PRODUTOS ============ */
+/* RENDER PRODUTOS */
 function renderProdutos(){
   const el = $('produtosGrid');
   if (!produtos.length){
@@ -1018,7 +1019,7 @@ function renderProdutos(){
   el.querySelectorAll('.produto').forEach(attachTilt);
 }
 
-/* ============ CARRINHO ============ */
+/* CARRINHO */
 function addToCart(produtoId){
   const p = produtos.find(x => x.id === produtoId);
   if (!p){ showToast('Produto indisponível.', 'error'); return; }
@@ -1137,7 +1138,6 @@ function renderCart(){
     <button class="btn btn-primario btn-block" id="btnConfirmar">Confirmar pagamento</button>
   `;
 
-  // listeners
   const fileInput = $('fileReceipt');
   if (fileInput) fileInput.addEventListener('change', handleReceipt);
 
@@ -1213,7 +1213,7 @@ async function confirmarPedido(){
   }
 }
 
-/* ============ MENSAGENS / PEDIDOS ============ */
+/* MENSAGENS */
 function renderMessages(){
   const el = $('messagesBody');
   if (!pedidosCliente.length){
@@ -1311,7 +1311,7 @@ function closeDelivery(){
   $('overlay').classList.remove('active');
 }
 
-/* ============ CHAT ============ */
+/* CHAT */
 function renderChat(){
   const el = $('chatBody');
   if (!el) return;
@@ -1350,7 +1350,6 @@ async function sendChat(){
     const msgRef = push(ref(db, 'chats/' + CLIENTE_ID + '/mensagens'));
     await set(msgRef, { de: 'cliente', texto, ts: Date.now() });
 
-    // atualiza metadados
     const base = ref(db, 'chats/' + CLIENTE_ID);
     const snap = await get(base);
     const cur = snap.val() || {};
@@ -1371,7 +1370,7 @@ async function sendChat(){
   }
 }
 
-/* ============ BADGES ============ */
+/* BADGES */
 function updateBadges(){
   const cartQty = cart.reduce((s, i) => s + i.qtd, 0);
   const bCart = $('badgeCart');
@@ -1380,11 +1379,10 @@ function updateBadges(){
 
   const unreadOrders = pedidosCliente.filter(p => p.status === 'concluido' && p.vistoCliente === false).length;
   const unreadChat = (chatData && chatData.naoLidasCliente) || 0;
-  const totalMsg = unreadOrders;
 
   const bMsg = $('badgeMessages');
-  bMsg.textContent = totalMsg;
-  bMsg.classList.toggle('show', totalMsg > 0);
+  bMsg.textContent = unreadOrders;
+  bMsg.classList.toggle('show', unreadOrders > 0);
 
   const bChat = $('badgeChat');
   bChat.textContent = unreadChat;
@@ -1395,7 +1393,7 @@ function updateBadges(){
   bFab.classList.toggle('show', unreadChat > 0);
 }
 
-/* ============ PANÉIS ============ */
+/* PAINÉIS */
 function closeAll(){
   $('cartPanel').classList.remove('open');
   $('messagesPanel').classList.remove('open');
@@ -1409,32 +1407,31 @@ function openCart(){
   $('cartPanel').classList.add('open');
   $('overlay').classList.add('active');
 }
-async function openMessages(){
+function openMessages(){
   closeAll();
   renderMessages();
   $('messagesPanel').classList.add('open');
   $('overlay').classList.add('active');
 }
-async function openChat(){
+function openChat(){
   closeAll();
   renderChat();
   $('chatPanel').classList.add('open');
   $('overlay').classList.add('active');
 
-  // zera não lidas do cliente
   if (chatData && (chatData.naoLidasCliente || 0) > 0){
     update(ref(db, 'chats/' + CLIENTE_ID), { naoLidasCliente: 0 }).catch(console.error);
   }
 }
 
-/* ============ EVENTOS ============ */
+/* EVENTOS */
 $('btnCart').addEventListener('click', openCart);
 $('btnMessages').addEventListener('click', openMessages);
 $('btnChat').addEventListener('click', openChat);
 $('overlay').addEventListener('click', closeAll);
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); });
 
-/* ============ LISTENERS FIREBASE ============ */
+/* LISTENERS FIREBASE */
 onValue(ref(db, 'produtos'), snap => {
   produtos = [];
   snap.forEach(c => produtos.push({ id: c.key, ...c.val() }));
@@ -1470,11 +1467,10 @@ onValue(ref(db, 'chats/' + CLIENTE_ID), snap => {
   if ($('chatPanel').classList.contains('open')) renderChat();
 }, console.error);
 
-/* ============ INIT ============ */
+/* INIT */
 renderCart();
 updateBadges();
 
-// expõe funções usadas em inline handlers
 window.addToCart = addToCart;
 window.changeQty = changeQty;
 window.removeItem = removeItem;
