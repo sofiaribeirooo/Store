@@ -2,163 +2,194 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEXUS STORE — Loja de Produtos Digitais e Contas</title>
-<meta name="description" content="NEXUS STORE — loja de produtos digitais e contas. Compra rápida, pagamento via PIX e entrega das credenciais direto na sua caixa de mensagens.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+<meta name="theme-color" content="#050505">
+<title>NEXUS STORE — Produtos Digitais e Contas</title>
 <style>
 :root{
-  --preto:#050505;
-  --preto-2:#0d0d0d;
-  --preto-3:#151515;
-  --preto-4:#1c1c1c;
-  --vermelho:#e10b0b;
-  --vermelho-2:#ff2020;
-  --vermelho-esc:#7a0505;
-  --branco:#ffffff;
-  --cinza:#9a9a9a;
-  --cinza-2:#5e5e5e;
-  --borda:#232323;
-  --borda-2:#2e2e2e;
+  --preto:#050505; --preto-2:#0d0d0d; --preto-3:#151515; --preto-4:#1c1c1c;
+  --vermelho:#e10b0b; --vermelho-2:#ff2020; --vermelho-esc:#7a0505;
+  --branco:#fff; --cinza:#9a9a9a; --cinza-2:#5e5e5e;
+  --borda:#232323; --borda-2:#2e2e2e;
   --glow:0 20px 60px -25px rgba(225,11,11,.7);
 }
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
   font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;
-  background:var(--preto);
-  color:var(--branco);
-  overflow-x:hidden;
-  min-height:100vh;
+  background:var(--preto);color:var(--branco);
+  overflow-x:hidden;min-height:100vh;
   -webkit-font-smoothing:antialiased;
 }
+body.intro-active{overflow:hidden}
 ::-webkit-scrollbar{width:8px;height:8px}
 ::-webkit-scrollbar-track{background:var(--preto-2)}
 ::-webkit-scrollbar-thumb{background:var(--vermelho-esc);border-radius:4px}
-::-webkit-scrollbar-thumb:hover{background:var(--vermelho)}
-
-.bg-glow{
-  position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background:
-    radial-gradient(ellipse 600px 400px at 80% -5%, rgba(225,11,11,.20), transparent 65%),
-    radial-gradient(ellipse 500px 350px at 10% 100%, rgba(225,11,11,.14), transparent 65%);
-  animation:bgPulse 10s ease-in-out infinite alternate;
-}
-@keyframes bgPulse{0%{opacity:.75}100%{opacity:1}}
 
 a{text-decoration:none;color:inherit}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
-input,textarea{font-family:inherit;outline:none}
+input,textarea{font-family:inherit;outline:none;font-size:16px}
 img{max-width:100%;display:block}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-@keyframes pulseBadge{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes pulseBadge{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes toastIn{from{opacity:0;transform:translateY(24px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes toastOut{to{opacity:0;transform:translateY(24px) scale(.95)}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 30px -5px rgba(225,11,11,.6)}50%{box-shadow:0 0 50px 0 rgba(225,11,11,.9)}}
+@keyframes drawPath{to{stroke-dashoffset:0}}
 
-/* HEADER */
-.topbar{
-  background:linear-gradient(90deg,var(--vermelho-esc),var(--vermelho),var(--vermelho-esc));
-  background-size:200% 100%;
-  animation:topbarShift 6s linear infinite;
-  text-align:center;font-size:.72rem;font-weight:800;letter-spacing:2px;
-  padding:7px 12px;text-transform:uppercase;
+/* ========== INTRO (Netflix-style) ========== */
+.intro{
+  position:fixed;inset:0;z-index:99999;
+  background:#000;
+  display:grid;place-items:center;
+  transition:opacity .5s ease;
 }
-@keyframes topbarShift{0%{background-position:0% 0}100%{background-position:200% 0}}
+.intro.fade-out{opacity:0;pointer-events:none}
+.intro-content{
+  display:flex;flex-direction:column;align-items:center;gap:22px;
+}
+.intro-n{
+  width:140px;height:180px;
+  filter:drop-shadow(0 0 40px rgba(225,11,11,.95));
+}
+.intro-n path{
+  stroke:var(--vermelho);stroke-width:24;fill:none;
+  stroke-linecap:square;stroke-linejoin:miter;
+  stroke-dasharray:300;stroke-dashoffset:300;
+}
+.intro-n .draw-1{animation:drawPath .45s ease-out .15s forwards}
+.intro-n .draw-2{animation:drawPath .45s ease-out .5s forwards}
+.intro-n .draw-3{animation:drawPath .5s ease-out .9s forwards}
+.intro-text{
+  font-size:1.1rem;font-weight:900;letter-spacing:.5em;
+  color:#fff;opacity:0;
+  animation:fadeIn .6s ease 1.4s forwards;
+  padding-left:.5em;
+}
+.intro-text span{color:var(--vermelho)}
 
+/* ========== BG GLOW ========== */
+.bg-glow{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(ellipse 500px 350px at 85% -5%, rgba(225,11,11,.18), transparent 65%),
+    radial-gradient(ellipse 400px 300px at 5% 95%, rgba(225,11,11,.10), transparent 65%);
+}
+
+/* ========== HEADER ========== */
 header{
   position:sticky;top:0;z-index:200;
   background:rgba(5,5,5,.85);
-  backdrop-filter:blur(14px);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   border-bottom:1px solid var(--borda);
 }
 .nav{
-  max-width:1280px;margin:0 auto;padding:16px 24px;
-  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  max-width:1280px;margin:0 auto;padding:14px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
 }
 .logo{
-  font-size:1.4rem;font-weight:900;letter-spacing:3px;
   display:flex;align-items:center;gap:10px;
   transition:transform .3s;
 }
 .logo:hover{transform:scale(1.03)}
 .logo-mark{
-  width:32px;height:32px;border-radius:8px;
+  width:38px;height:38px;border-radius:10px;
   background:linear-gradient(135deg,var(--vermelho),var(--vermelho-esc));
-  display:grid;place-items:center;font-size:.9rem;font-weight:900;
-  box-shadow:0 6px 18px -6px rgba(225,11,11,.8);
+  display:grid;place-items:center;
+  font-size:1.15rem;font-weight:900;color:#fff;
+  box-shadow:0 8px 22px -8px rgba(225,11,11,.9),inset 0 1px 0 rgba(255,255,255,.15);
   transform:rotate(-8deg);
-  transition:transform .4s;
+  transition:transform .4s cubic-bezier(.2,.8,.2,1);
+  position:relative;overflow:hidden;
 }
-.logo:hover .logo-mark{transform:rotate(0deg) scale(1.1)}
-.logo span{color:var(--vermelho)}
+.logo-mark::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.4),transparent 70%);
+  transform:translateX(-150%);transition:transform .6s;
+}
+.logo:hover .logo-mark{transform:rotate(0) scale(1.08)}
+.logo:hover .logo-mark::after{transform:translateX(150%)}
+.logo-text{
+  font-size:1rem;font-weight:900;letter-spacing:2px;
+  display:flex;flex-direction:column;line-height:1.1;
+}
+.logo-text small{
+  font-size:.55rem;letter-spacing:3px;color:var(--cinza);font-weight:600;
+}
+.logo-text span{color:var(--vermelho)}
 
-.menu{display:flex;gap:28px;list-style:none;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px}
+.menu{display:flex;gap:24px;list-style:none;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px}
 .menu a{position:relative;padding:6px 0;color:var(--cinza);transition:color .25s}
 .menu a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--vermelho);transition:width .3s;box-shadow:0 0 10px var(--vermelho)}
-.menu a:hover{color:var(--branco)}
+.menu a:hover{color:#fff}
 .menu a:hover::after{width:100%}
 
-.acoes{display:flex;align-items:center;gap:12px}
+.acoes{display:flex;align-items:center;gap:8px}
 .icon-btn{
   position:relative;width:44px;height:44px;border-radius:12px;
   border:1px solid var(--borda);background:var(--preto-2);
-  display:grid;place-items:center;color:var(--branco);
-  transition:.3s;
+  display:grid;place-items:center;color:#fff;
+  transition:.3s cubic-bezier(.2,.8,.2,1);
 }
-.icon-btn:hover{border-color:var(--vermelho);background:var(--preto-3);transform:translateY(-2px);box-shadow:var(--glow)}
-.icon-btn svg{transition:transform .3s}
-.icon-btn:hover svg{transform:scale(1.15)}
+.icon-btn:hover,.icon-btn:active{
+  border-color:var(--vermelho);background:var(--preto-3);
+  box-shadow:0 8px 22px -8px rgba(225,11,11,.7);
+}
+.icon-btn:active{transform:scale(.94)}
+.icon-btn svg{width:19px;height:19px}
 .badge{
-  position:absolute;top:-6px;right:-6px;
-  min-width:20px;height:20px;padding:0 5px;border-radius:10px;
-  background:var(--vermelho);color:#fff;font-size:.68rem;font-weight:900;
+  position:absolute;top:-4px;right:-4px;
+  min-width:19px;height:19px;padding:0 5px;border-radius:10px;
+  background:var(--vermelho);color:#fff;font-size:.65rem;font-weight:900;
   display:none;place-items:center;
   box-shadow:0 0 14px rgba(225,11,11,.9);
   animation:pulseBadge 1.6s ease-in-out infinite;
 }
 .badge.show{display:grid}
 
-/* HERO */
+/* ========== HERO ========== */
 .hero{
   max-width:1280px;margin:0 auto;
-  padding:90px 24px 70px;
+  padding:56px 20px 40px;
   display:grid;grid-template-columns:1.15fr .85fr;
-  gap:60px;align-items:center;position:relative;
+  gap:50px;align-items:center;position:relative;
 }
-.hero-tag{
-  display:inline-block;
-  border:1px solid var(--vermelho);
-  background:rgba(225,11,11,.10);
-  color:var(--vermelho-2);
-  font-size:.72rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;
-  padding:8px 18px;border-radius:100px;margin-bottom:24px;
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--borda-2);
+  background:var(--preto-3);
+  color:var(--cinza);
+  font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:8px 14px;border-radius:100px;margin-bottom:22px;
   animation:fadeUp .7s ease both;
 }
+.hero-badge::before{
+  content:"";width:6px;height:6px;border-radius:50%;
+  background:var(--vermelho);box-shadow:0 0 10px var(--vermelho);
+  animation:pulseBadge 2s ease-in-out infinite;
+}
 .hero h1{
-  font-size:clamp(2.2rem,5vw,4rem);
-  line-height:1.03;font-weight:900;letter-spacing:-1.5px;
-  margin-bottom:22px;animation:fadeUp .7s ease .1s both;
+  font-size:clamp(2rem,5.5vw,3.6rem);
+  line-height:1.02;font-weight:900;letter-spacing:-1.5px;
+  margin-bottom:18px;animation:fadeUp .7s ease .1s both;
 }
-.hero h1 em{font-style:normal;color:var(--vermelho);text-shadow:0 0 40px rgba(225,11,11,.5)}
-.hero .hero-sub{
-  color:var(--cinza);font-size:1rem;line-height:1.6;
-  max-width:520px;margin-bottom:14px;font-weight:500;
-  animation:fadeUp .7s ease .18s both;
-}
+.hero h1 em{font-style:normal;color:var(--vermelho);text-shadow:0 0 40px rgba(225,11,11,.55)}
 .hero p{
-  color:var(--cinza);font-size:1.02rem;line-height:1.7;
-  max-width:520px;margin-bottom:36px;animation:fadeUp .7s ease .24s both;
+  color:var(--cinza);font-size:1rem;line-height:1.6;
+  max-width:440px;margin-bottom:32px;animation:fadeUp .7s ease .2s both;
 }
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .7s ease .3s both}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;animation:fadeUp .7s ease .3s both}
 
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:10px;
-  padding:15px 32px;border-radius:12px;
-  font-weight:800;font-size:.88rem;letter-spacing:1px;text-transform:uppercase;
-  transition:.3s;border:1px solid transparent;
+  padding:14px 28px;border-radius:12px;
+  font-weight:800;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;
+  transition:.3s cubic-bezier(.2,.8,.2,1);border:1px solid transparent;
+  min-height:48px;
 }
 .btn-primario{
   background:linear-gradient(135deg,var(--vermelho),var(--vermelho-esc));
@@ -171,210 +202,190 @@ header{
   transform:translateX(-150%);transition:transform .6s;
 }
 .btn-primario:hover::after{transform:translateX(150%)}
-.btn-primario:hover{transform:translateY(-3px);box-shadow:0 20px 44px -12px rgba(225,11,11,1)}
+.btn-primario:hover{transform:translateY(-2px);box-shadow:0 20px 44px -12px rgba(225,11,11,1)}
+.btn-primario:active{transform:translateY(0) scale(.98)}
 .btn-secundario{background:transparent;color:#fff;border-color:var(--borda-2)}
-.btn-secundario:hover{border-color:var(--branco);transform:translateY(-3px)}
+.btn-secundario:hover{border-color:#fff;transform:translateY(-2px)}
+.btn-secundario:active{transform:scale(.98)}
 .btn-block{width:100%}
 
-.hero-card{perspective:1200px;animation:fadeUp .8s ease .3s both}
+/* HERO CARD (efeito 3D) */
+.hero-card{perspective:1200px;animation:fadeUp .8s ease .35s both}
 .hero-card-inner{
   background:linear-gradient(150deg,var(--preto-3),var(--preto-2));
   border:1px solid var(--borda-2);
-  border-radius:22px;padding:34px;
+  border-radius:20px;padding:28px;
   position:relative;overflow:hidden;
-  transform:rotateY(-6deg) rotateX(3deg);
-  transition:transform .5s;
-  box-shadow:0 40px 80px -40px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.04);
+  transform:rotateY(-5deg) rotateX(2deg);
+  box-shadow:0 40px 80px -40px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.04);
   animation:float 6s ease-in-out infinite;
+  transition:transform .5s;
 }
 .hero-card-inner::before{
   content:"";position:absolute;inset:0;
-  background:radial-gradient(circle at 85% 0%, rgba(225,11,11,.4), transparent 60%);
+  background:radial-gradient(circle at 85% 0%,rgba(225,11,11,.35),transparent 60%);
   pointer-events:none;
-}
-.hero-card-inner h3{
-  font-size:.85rem;text-transform:uppercase;letter-spacing:3px;
-  color:var(--vermelho-2);margin-bottom:20px;position:relative;
 }
 .hero-card-inner ul{list-style:none;display:grid;gap:16px;position:relative}
 .hero-card-inner li{
-  display:flex;align-items:center;gap:14px;
-  font-size:.94rem;color:#e2e2e2;position:relative;
+  display:flex;align-items:center;gap:12px;
+  font-size:.88rem;color:#e2e2e2;position:relative;
 }
 .hero-card-inner li::before{
   content:"";flex-shrink:0;
-  width:24px;height:24px;border-radius:50%;
+  width:26px;height:26px;border-radius:8px;
   background:linear-gradient(135deg,var(--vermelho),var(--vermelho-esc));
   display:grid;place-items:center;
-  box-shadow:0 0 16px rgba(225,11,11,.7);
+  box-shadow:0 0 16px rgba(225,11,11,.6);
 }
 .hero-card-inner li::after{
-  content:"";position:absolute;left:8px;
+  content:"";position:absolute;left:9px;
   width:8px;height:4px;border-left:2px solid #fff;border-bottom:2px solid #fff;
-  transform:rotate(-45deg);pointer-events:none;
+  transform:rotate(-45deg);
 }
 
-/* SEÇÕES */
-section{padding:80px 24px}
+/* ========== SEÇÕES ========== */
+section{padding:60px 20px}
 .container{max-width:1280px;margin:0 auto}
-.titulo-secao{text-align:center;margin-bottom:56px}
+.titulo-secao{text-align:center;margin-bottom:36px}
 .titulo-secao span{
-  color:var(--vermelho);font-size:.75rem;font-weight:800;
-  letter-spacing:4px;text-transform:uppercase;
+  color:var(--vermelho);font-size:.7rem;font-weight:800;
+  letter-spacing:3px;text-transform:uppercase;
 }
 .titulo-secao h2{
-  font-size:clamp(1.8rem,3.5vw,2.6rem);
-  font-weight:900;letter-spacing:-1px;margin-top:10px;
+  font-size:clamp(1.5rem,4vw,2.2rem);
+  font-weight:900;letter-spacing:-.8px;margin-top:8px;
 }
-.titulo-secao p{color:var(--cinza);margin-top:12px;font-size:.98rem}
 
-/* PRODUTOS */
+/* ========== PRODUTOS ========== */
 .grid-produtos{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(255px,1fr));
-  gap:26px;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:18px;
 }
 .produto{
   background:linear-gradient(160deg,var(--preto-3),var(--preto-2));
-  border:1px solid var(--borda);
-  border-radius:18px;overflow:hidden;
-  display:flex;flex-direction:column;
-  transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s, border-color .35s;
-  transform-style:preserve-3d;
-  will-change:transform;
-  animation:fadeUp .6s ease both;
+  border:1px solid var(--borda);border-radius:16px;overflow:hidden;
+  display:flex;flex-direction:column;cursor:pointer;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s;
+  animation:fadeUp .5s ease both;
+  position:relative;
 }
 .produto:hover{
   border-color:var(--vermelho);
-  box-shadow:0 30px 60px -25px rgba(225,11,11,.6);
+  box-shadow:0 24px 55px -25px rgba(225,11,11,.7);
+  transform:translateY(-4px);
 }
+.produto:active{transform:scale(.98)}
 .produto-img{
-  height:200px;position:relative;overflow:hidden;
+  aspect-ratio:4/3;position:relative;overflow:hidden;
   background:linear-gradient(145deg,#1a1a1a,#0a0a0a);
-  border-bottom:1px solid var(--borda);
   display:grid;place-items:center;
 }
 .produto-img img{
   width:100%;height:100%;object-fit:cover;
   transition:transform .6s cubic-bezier(.2,.8,.2,1);
 }
-.produto:hover .produto-img img{transform:scale(1.1)}
+.produto:hover .produto-img img{transform:scale(1.08)}
 .produto-img .placeholder{
-  font-size:4rem;font-weight:900;color:var(--vermelho);
+  font-size:3.5rem;font-weight:900;color:var(--vermelho);
   text-shadow:0 0 50px rgba(225,11,11,.8);
   transition:transform .4s;
 }
-.produto:hover .produto-img .placeholder{transform:scale(1.15) rotate(-3deg)}
+.produto:hover .produto-img .placeholder{transform:scale(1.12)}
 .produto-img::after{
   content:"";position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(circle at 50% 120%, rgba(225,11,11,.35), transparent 60%);
+  background:radial-gradient(circle at 50% 120%,rgba(225,11,11,.3),transparent 60%);
   opacity:0;transition:opacity .4s;
 }
 .produto:hover .produto-img::after{opacity:1}
 .tag{
-  position:absolute;top:14px;left:14px;z-index:2;
+  position:absolute;top:10px;left:10px;z-index:2;
   background:var(--vermelho);color:#fff;
-  font-size:.66rem;font-weight:900;letter-spacing:1.5px;
-  padding:6px 12px;border-radius:6px;
+  font-size:.62rem;font-weight:900;letter-spacing:1.2px;
+  padding:5px 10px;border-radius:6px;
   box-shadow:0 0 18px rgba(225,11,11,.7);
 }
-.produto-info{padding:22px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.produto-info{
+  padding:14px 14px 16px;
+  display:flex;flex-direction:column;gap:6px;flex:1;
+}
 .produto-cat{
-  font-size:.68rem;text-transform:uppercase;letter-spacing:2px;
+  font-size:.62rem;text-transform:uppercase;letter-spacing:1.8px;
   color:var(--vermelho-2);font-weight:700;
 }
-.produto-info h3{font-size:1.05rem;font-weight:800;line-height:1.3}
-.produto-desc{
-  font-size:.82rem;color:var(--cinza);line-height:1.5;
+.produto-info h3{
+  font-size:.9rem;font-weight:800;line-height:1.3;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
-.precos{display:flex;align-items:baseline;gap:10px;margin-top:auto;padding-top:8px}
-.preco{font-size:1.5rem;font-weight:900;color:#fff}
-.preco small{font-size:.75rem;color:var(--vermelho-2)}
-.btn-comprar{
-  margin-top:10px;width:100%;padding:13px;
-  border:1px solid var(--borda-2);border-radius:10px;
-  background:transparent;color:#fff;
-  font-weight:800;font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase;
-  transition:.3s;
+.produto-preco{
+  font-size:1.15rem;font-weight:900;color:#fff;margin-top:auto;padding-top:6px;
 }
-.btn-comprar:hover{
-  background:linear-gradient(135deg,var(--vermelho),var(--vermelho-esc));
-  border-color:transparent;transform:translateY(-2px);
-  box-shadow:0 12px 26px -10px rgba(225,11,11,.9);
-}
+.produto-preco small{font-size:.7rem;color:var(--vermelho-2);margin-left:2px}
+
 .empty-state{
-  grid-column:1/-1;text-align:center;padding:70px 20px;
-  color:var(--cinza);font-size:.95rem;
+  grid-column:1/-1;text-align:center;padding:60px 20px;
+  color:var(--cinza);font-size:.9rem;
 }
-.loading{
-  grid-column:1/-1;display:grid;place-items:center;padding:80px;
-}
+.loading{grid-column:1/-1;display:grid;place-items:center;padding:70px}
 .spinner{
-  width:44px;height:44px;border:3px solid var(--borda);
+  width:40px;height:40px;border:3px solid var(--borda);
   border-top-color:var(--vermelho);border-radius:50%;
   animation:spin .8s linear infinite;
 }
 
-/* STEPS */
-.steps{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;
+/* ========== FEATURES ========== */
+.features{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:14px;
 }
-.step{
+.feature{
   background:linear-gradient(160deg,var(--preto-3),var(--preto-2));
-  border:1px solid var(--borda);border-radius:16px;
-  padding:30px 24px;position:relative;overflow:hidden;
+  border:1px solid var(--borda);border-radius:14px;
+  padding:22px 16px;text-align:center;
   transition:.35s;
 }
-.step:hover{transform:translateY(-6px);border-color:var(--vermelho);box-shadow:var(--glow)}
-.step-num{
-  font-size:2.4rem;font-weight:900;color:var(--vermelho);
-  line-height:1;margin-bottom:14px;letter-spacing:-2px;
-  text-shadow:0 0 30px rgba(225,11,11,.5);
+.feature:hover{
+  border-color:var(--vermelho);transform:translateY(-4px);
+  box-shadow:var(--glow);
 }
-.step h4{font-size:.95rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
-.step p{font-size:.85rem;color:var(--cinza);line-height:1.6}
+.feature-icon{
+  width:48px;height:48px;margin:0 auto 12px;
+  border-radius:12px;
+  background:linear-gradient(135deg,rgba(225,11,11,.2),rgba(225,11,11,.05));
+  border:1px solid rgba(225,11,11,.3);
+  display:grid;place-items:center;color:var(--vermelho-2);
+}
+.feature-icon svg{width:22px;height:22px}
+.feature h4{font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:.8px}
+.feature p{font-size:.75rem;color:var(--cinza);margin-top:4px}
 
-/* FOOTER */
+/* ========== FOOTER ========== */
 footer{
   border-top:1px solid var(--borda);
-  padding:50px 24px 0;
   background:var(--preto-2);
+  padding:36px 20px 24px;
+  text-align:center;
 }
-.footer-inner{
-  max-width:1280px;margin:0 auto;
-  display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;
-  padding-bottom:40px;
-}
-.footer-inner p{color:var(--cinza);font-size:.85rem;max-width:340px;margin-top:12px;line-height:1.6}
-.footer-cols{display:flex;gap:60px;flex-wrap:wrap}
-.footer-cols h5{
-  font-size:.75rem;text-transform:uppercase;letter-spacing:2px;
-  color:var(--vermelho-2);margin-bottom:14px;
-}
-.footer-cols a{
-  display:block;color:var(--cinza);font-size:.85rem;
-  margin-bottom:10px;transition:.25s;
-}
-.footer-cols a:hover{color:var(--branco);padding-left:4px}
+.footer-inner{max-width:1280px;margin:0 auto}
+.footer-inner p{color:var(--cinza);font-size:.82rem;margin-top:10px;line-height:1.6}
 .footer-bottom{
-  border-top:1px solid var(--borda);
-  max-width:1280px;margin:0 auto;
-  padding:22px 0;font-size:.78rem;color:var(--cinza-2);
-  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  border-top:1px solid var(--borda);margin-top:24px;padding-top:20px;
+  font-size:.72rem;color:var(--cinza-2);
 }
 
-/* OVERLAY + PAINÉIS */
+/* ========== OVERLAY ========== */
 .overlay{
   position:fixed;inset:0;z-index:500;
-  background:rgba(0,0,0,.7);backdrop-filter:blur(4px);
+  background:rgba(0,0,0,.75);backdrop-filter:blur(4px);
   opacity:0;visibility:hidden;transition:.3s;
 }
 .overlay.active{opacity:1;visibility:visible}
 
+/* ========== PANELS ========== */
 .panel{
   position:fixed;top:0;right:0;bottom:0;z-index:600;
-  width:100%;max-width:520px;
+  width:100%;max-width:480px;
   background:linear-gradient(180deg,var(--preto-2),var(--preto));
   border-left:1px solid var(--borda);
   transform:translateX(105%);
@@ -385,349 +396,559 @@ footer{
 .panel.open{transform:translateX(0)}
 .panel-head{
   display:flex;align-items:center;justify-content:space-between;
-  padding:22px 24px;border-bottom:1px solid var(--borda);
-  flex-shrink:0;
+  padding:18px 20px;border-bottom:1px solid var(--borda);flex-shrink:0;
+  padding-top:calc(18px + env(safe-area-inset-top,0));
 }
 .panel-head h2{
-  font-size:1.1rem;font-weight:900;text-transform:uppercase;
-  letter-spacing:1.5px;
+  font-size:1rem;font-weight:900;text-transform:uppercase;letter-spacing:1.2px;
 }
 .panel-head h2 span{color:var(--vermelho)}
 .close-btn{
-  width:36px;height:36px;border-radius:10px;
+  width:38px;height:38px;border-radius:10px;
   border:1px solid var(--borda);color:var(--cinza);
-  font-size:1.4rem;line-height:1;display:grid;place-items:center;
-  transition:.25s;
+  display:grid;place-items:center;transition:.25s;
 }
-.close-btn:hover{border-color:var(--vermelho);color:#fff;background:var(--vermelho)}
+.close-btn:hover,.close-btn:active{border-color:var(--vermelho);color:#fff;background:var(--vermelho)}
+.close-btn:active{transform:scale(.92)}
+.close-btn svg{width:16px;height:16px}
 .panel-body{
-  flex:1;overflow-y:auto;padding:24px;
-  display:flex;flex-direction:column;gap:22px;
+  flex:1;overflow-y:auto;padding:20px;
+  display:flex;flex-direction:column;gap:18px;
+  -webkit-overflow-scrolling:touch;
 }
 .panel-foot{
-  padding:20px 24px;border-top:1px solid var(--borda);
-  flex-shrink:0;background:var(--preto-2);
+  padding:18px 20px;border-top:1px solid var(--borda);flex-shrink:0;
+  background:var(--preto-2);
+  padding-bottom:calc(18px + env(safe-area-inset-bottom,0));
 }
 
-/* CARRINHO */
-.cart-items{display:flex;flex-direction:column;gap:14px}
+/* ========== CARRINHO ========== */
+.cart-items{display:flex;flex-direction:column;gap:12px}
 .cart-item{
-  display:flex;gap:14px;padding:14px;
+  display:flex;gap:12px;padding:12px;
   background:var(--preto-3);border:1px solid var(--borda);
-  border-radius:12px;
+  border-radius:12px;animation:fadeUp .3s ease;
 }
 .cart-item-img{
-  width:64px;height:64px;border-radius:10px;flex-shrink:0;
+  width:60px;height:60px;border-radius:10px;flex-shrink:0;
   background:linear-gradient(135deg,#1e1e1e,#0a0a0a);
   display:grid;place-items:center;overflow:hidden;
   border:1px solid var(--borda-2);
 }
 .cart-item-img img{width:100%;height:100%;object-fit:cover}
-.cart-item-img span{font-size:1.6rem;font-weight:900;color:var(--vermelho)}
+.cart-item-img span{font-size:1.5rem;font-weight:900;color:var(--vermelho)}
 .cart-item-info{flex:1;min-width:0}
-.cart-item-info h4{font-size:.9rem;font-weight:800;margin-bottom:4px;line-height:1.3}
-.cart-item-price{font-size:.85rem;color:var(--vermelho-2);font-weight:700}
-.qty-control{
-  display:flex;align-items:center;gap:10px;margin-top:10px;
-}
+.cart-item-info h4{font-size:.85rem;font-weight:800;margin-bottom:2px;line-height:1.3}
+.cart-item-price{font-size:.82rem;color:var(--vermelho-2);font-weight:700}
+.qty-control{display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap}
 .qty-control button{
-  width:26px;height:26px;border-radius:7px;
+  width:30px;height:30px;border-radius:8px;
   background:var(--preto-4);border:1px solid var(--borda-2);
   font-size:.9rem;font-weight:800;display:grid;place-items:center;
-  transition:.25s;
+  transition:.2s;
 }
-.qty-control button:hover{border-color:var(--vermelho);color:var(--vermelho-2)}
-.qty-control span{min-width:24px;text-align:center;font-weight:800;font-size:.9rem}
+.qty-control button:active{transform:scale(.9);border-color:var(--vermelho)}
+.qty-control span{min-width:22px;text-align:center;font-weight:800;font-size:.88rem}
 .remove-btn{
-  margin-left:auto;font-size:.72rem;color:var(--cinza);
+  margin-left:auto;font-size:.68rem;color:var(--cinza);
   text-transform:uppercase;letter-spacing:1px;font-weight:700;
-  transition:.25s;
+  transition:.25s;padding:6px 8px;border-radius:6px;
 }
-.remove-btn:hover{color:var(--vermelho-2)}
+.remove-btn:hover{color:var(--vermelho-2);background:rgba(225,11,11,.08)}
 
 .checkout-section h3{
-  font-size:.78rem;text-transform:uppercase;letter-spacing:2px;
-  color:var(--cinza);margin-bottom:12px;
-  border-left:3px solid var(--vermelho);padding-left:10px;
+  font-size:.72rem;text-transform:uppercase;letter-spacing:2px;
+  color:var(--cinza);margin-bottom:10px;
+  border-left:3px solid var(--vermelho);padding-left:10px;font-weight:800;
 }
 .checkout-section input{
-  width:100%;padding:13px 15px;margin-bottom:10px;
+  width:100%;padding:12px 14px;margin-bottom:8px;
   background:var(--preto);border:1px solid var(--borda-2);
-  border-radius:10px;color:#fff;font-size:.9rem;
+  border-radius:10px;color:#fff;font-size:16px;
   transition:.25s;
 }
 .checkout-section input:focus{border-color:var(--vermelho);box-shadow:0 0 0 3px rgba(225,11,11,.15)}
 .checkout-section input::placeholder{color:var(--cinza-2)}
 
+.cupom-row{display:flex;gap:8px;margin-bottom:10px}
+.cupom-row input{margin-bottom:0;flex:1;text-transform:uppercase;letter-spacing:1px;font-weight:700}
+.cupom-aplicar{
+  padding:0 18px;border-radius:10px;
+  background:rgba(225,11,11,.15);border:1px solid var(--vermelho);
+  color:var(--vermelho-2);font-weight:800;font-size:.75rem;
+  text-transform:uppercase;letter-spacing:1px;transition:.25s;
+  min-height:44px;
+}
+.cupom-aplicar:hover,.cupom-aplicar:active{background:var(--vermelho);color:#fff}
+.cupom-ok{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  background:rgba(46,224,106,.08);border:1px solid rgba(46,224,106,.4);
+  border-radius:10px;padding:10px 14px;font-size:.8rem;
+  color:#2ee06a;font-weight:700;margin-bottom:10px;
+}
+.cupom-ok button{color:#2ee06a;font-size:.7rem;text-decoration:underline;font-weight:700}
+
 .pix-item{
   background:var(--preto-3);border:1px solid var(--borda);
-  border-radius:12px;padding:14px;margin-bottom:10px;
+  border-radius:12px;padding:12px;margin-bottom:8px;
 }
-.pix-key-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.pix-label{display:block;font-size:.7rem;color:var(--cinza);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.pix-key-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.pix-label{display:block;font-size:.65rem;color:var(--cinza);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;font-weight:700}
 .pix-key{
-  display:block;font-size:.85rem;font-weight:800;color:#fff;
-  word-break:break-all;
+  display:block;font-size:.82rem;font-weight:800;color:#fff;word-break:break-all;
+  font-family:'Courier New',monospace;
 }
 .copy-pix{
-  padding:8px 14px;border-radius:8px;font-size:.72rem;font-weight:800;
+  padding:8px 12px;border-radius:8px;font-size:.68rem;font-weight:800;
   text-transform:uppercase;letter-spacing:1px;
   background:rgba(225,11,11,.14);border:1px solid var(--vermelho);
   color:var(--vermelho-2);transition:.25s;white-space:nowrap;
 }
-.copy-pix:hover{background:var(--vermelho);color:#fff}
-.pix-qr{margin-top:14px;text-align:center}
-.pix-qr img{max-width:180px;margin:0 auto;border-radius:10px;border:1px solid var(--borda-2)}
-.pix-empty{font-size:.82rem;color:var(--cinza);padding:14px;background:var(--preto-3);border-radius:10px;border:1px dashed var(--borda-2);text-align:center}
+.copy-pix:hover,.copy-pix:active{background:var(--vermelho);color:#fff}
+.pix-qr{margin-top:12px;text-align:center}
+.pix-qr img{max-width:160px;margin:0 auto;border-radius:10px;border:1px solid var(--borda-2)}
+.pix-empty{
+  font-size:.78rem;color:var(--cinza);padding:14px;
+  background:var(--preto-3);border-radius:10px;
+  border:1px dashed var(--borda-2);text-align:center;
+}
 
 .upload-box{display:block;cursor:pointer}
 .upload-box #uploadPreview{
   border:2px dashed var(--borda-2);border-radius:12px;
-  padding:26px;text-align:center;color:var(--cinza);
-  font-size:.85rem;transition:.3s;
+  padding:22px 16px;text-align:center;color:var(--cinza);
+  font-size:.8rem;transition:.3s;
 }
 .upload-box:hover #uploadPreview{border-color:var(--vermelho);color:#fff;background:rgba(225,11,11,.05)}
-#uploadPreview img{max-height:180px;margin:0 auto 12px;border-radius:8px}
+#uploadPreview img{max-height:160px;margin:0 auto 10px;border-radius:8px}
 #uploadPreview.has-file{border-style:solid;border-color:var(--vermelho);background:var(--preto-3)}
 .upload-icon{
-  width:44px;height:44px;margin:0 auto 12px;border-radius:12px;
+  width:40px;height:40px;margin:0 auto 10px;border-radius:10px;
   background:rgba(225,11,11,.15);display:grid;place-items:center;
   color:var(--vermelho-2);
 }
+.upload-icon svg{width:20px;height:20px}
 
-.total-row{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:16px;padding:14px 0;
-  border-top:1px solid var(--borda);border-bottom:1px solid var(--borda);
+.totais{
+  display:flex;flex-direction:column;gap:6px;
+  padding:14px 0;border-top:1px solid var(--borda);border-bottom:1px solid var(--borda);
+  margin-bottom:14px;
 }
-.total-row span{font-size:.82rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--cinza);font-weight:700}
-.total-row strong{font-size:1.5rem;font-weight:900;color:#fff}
+.total-line{display:flex;justify-content:space-between;align-items:center;font-size:.82rem;color:var(--cinza)}
+.total-line.desc{color:#2ee06a}
+.total-line.final{
+  font-size:1rem;color:#fff;font-weight:900;
+  padding-top:8px;margin-top:4px;border-top:1px dashed var(--borda-2);
+}
+.total-line.final strong{font-size:1.35rem;font-weight:900}
 
-/* PEDIDOS / MENSAGENS */
+/* ========== PEDIDOS ========== */
 .order-card{
   background:var(--preto-3);border:1px solid var(--borda);
-  border-radius:14px;padding:18px;margin-bottom:14px;
+  border-radius:14px;padding:16px;margin-bottom:12px;
   transition:.3s;position:relative;
 }
 .order-card.unread{
   border-color:var(--vermelho);
-  box-shadow:0 0 0 1px var(--vermelho), 0 20px 40px -20px rgba(225,11,11,.7);
+  box-shadow:0 0 0 1px var(--vermelho),0 20px 40px -20px rgba(225,11,11,.7);
 }
 .order-card.unread::before{
   content:"";position:absolute;top:14px;right:14px;
-  width:10px;height:10px;border-radius:50%;
+  width:9px;height:9px;border-radius:50%;
   background:var(--vermelho);box-shadow:0 0 14px var(--vermelho);
   animation:pulseBadge 1.6s ease-in-out infinite;
 }
-.order-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px}
+.order-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:10px}
 .order-status{
-  display:inline-block;font-size:.66rem;font-weight:900;
-  text-transform:uppercase;letter-spacing:1.5px;
-  padding:5px 10px;border-radius:6px;margin-right:8px;
+  display:inline-block;font-size:.62rem;font-weight:900;
+  text-transform:uppercase;letter-spacing:1.2px;
+  padding:5px 9px;border-radius:6px;margin-right:6px;
 }
 .status-aguardando_aprovacao{background:rgba(255,190,0,.15);color:#ffbe00;border:1px solid #ffbe00}
-.status-em_atendimento{background:rgba(0,140,255,.15);color:#4fa8ff;border:1px solid #4fa8ff}
-.status-concluido{background:rgba(30,200,90,.15);color:#2ee06a;border:1px solid #2ee06a}
-.order-date{font-size:.72rem;color:var(--cinza)}
-.order-total{font-size:1rem;font-weight:900;color:#fff;white-space:nowrap}
-.order-items{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.status-em_atendimento{background:rgba(79,168,255,.15);color:#4fa8ff;border:1px solid #4fa8ff}
+.status-concluido{background:rgba(46,224,106,.15);color:#2ee06a;border:1px solid #2ee06a}
+.order-date{font-size:.68rem;color:var(--cinza)}
+.order-total{font-size:.95rem;font-weight:900;color:#fff;white-space:nowrap}
+.order-items{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
 .order-items span{
-  font-size:.72rem;background:var(--preto-4);
-  padding:4px 9px;border-radius:6px;color:var(--cinza);
+  font-size:.68rem;background:var(--preto-4);
+  padding:4px 8px;border-radius:6px;color:var(--cinza);
   border:1px solid var(--borda-2);
 }
 .btn-ver{
-  width:100%;padding:11px;border-radius:9px;
+  width:100%;padding:12px;border-radius:10px;
   background:linear-gradient(135deg,var(--vermelho),var(--vermelho-esc));
-  color:#fff;font-weight:800;font-size:.76rem;
-  text-transform:uppercase;letter-spacing:1.5px;
-  transition:.3s;
+  color:#fff;font-weight:800;font-size:.75rem;
+  text-transform:uppercase;letter-spacing:1.2px;
+  transition:.3s;min-height:44px;
 }
-.btn-ver:hover{transform:translateY(-2px);box-shadow:0 12px 26px -10px rgba(225,11,11,.9)}
+.btn-ver:hover,.btn-ver:active{transform:translateY(-1px);box-shadow:0 12px 26px -10px rgba(225,11,11,.9)}
+.btn-ver:active{transform:scale(.97)}
+.order-pending{
+  font-size:.75rem;color:var(--cinza);text-align:center;padding:8px 0;
+}
 
-/* CHAT */
+/* ========== CHAT ========== */
 .chat-body{
-  flex:1;overflow-y:auto;padding:20px;
-  display:flex;flex-direction:column;gap:12px;
+  flex:1;overflow-y:auto;padding:16px;
+  display:flex;flex-direction:column;gap:10px;
+  -webkit-overflow-scrolling:touch;
 }
-.chat-empty{text-align:center;color:var(--cinza);font-size:.85rem;padding:40px 20px}
-.chat-msg{display:flex;flex-direction:column;max-width:85%}
+.chat-empty{text-align:center;color:var(--cinza);font-size:.82rem;padding:40px 16px}
+.chat-msg{display:flex;flex-direction:column;max-width:85%;animation:fadeUp .25s ease}
 .chat-msg.in{align-self:flex-start}
 .chat-msg.out{align-self:flex-end;align-items:flex-end}
 .chat-bubble{
-  padding:11px 15px;border-radius:14px;
-  font-size:.88rem;line-height:1.5;
-  animation:fadeUp .3s ease both;
+  padding:10px 14px;border-radius:14px;
+  font-size:.85rem;line-height:1.5;word-break:break-word;
 }
-.chat-msg.in .chat-bubble{
-  background:var(--preto-3);border:1px solid var(--borda-2);
-  border-bottom-left-radius:4px;
+.chat-msg.in .chat-bubble{background:var(--preto-3);border:1px solid var(--borda-2);border-bottom-left-radius:4px}
+.chat-msg.out .chat-bubble{background:linear-gradient(135deg,var(--vermelho),var(--vermelho-esc));color:#fff;border-bottom-right-radius:4px}
+.chat-bubble img{
+  border-radius:10px;max-width:100%;max-height:240px;
+  object-fit:cover;cursor:pointer;display:block;
+  margin-bottom:6px;
 }
-.chat-msg.out .chat-bubble{
-  background:linear-gradient(135deg,var(--vermelho),var(--vermelho-esc));
-  color:#fff;border-bottom-right-radius:4px;
-}
-.chat-time{font-size:.68rem;color:var(--cinza-2);margin-top:4px;padding:0 4px}
+.chat-time{font-size:.62rem;color:var(--cinza-2);margin-top:4px;padding:0 4px}
 .chat-foot{
-  padding:16px 20px;border-top:1px solid var(--borda);
-  display:flex;gap:10px;flex-shrink:0;background:var(--preto-2);
+  padding:12px 16px;border-top:1px solid var(--borda);
+  display:flex;gap:8px;flex-shrink:0;background:var(--preto-2);
+  padding-bottom:calc(12px + env(safe-area-inset-bottom,0));
+  align-items:flex-end;
 }
-.chat-foot input{
-  flex:1;padding:13px 15px;border-radius:10px;
+.chat-img-btn{
+  width:44px;height:44px;border-radius:10px;flex-shrink:0;
+  background:var(--preto-3);border:1px solid var(--borda-2);
+  display:grid;place-items:center;color:var(--cinza);transition:.25s;
+}
+.chat-img-btn:hover,.chat-img-btn:active{border-color:var(--vermelho);color:var(--vermelho-2)}
+.chat-img-btn:active{transform:scale(.94)}
+.chat-img-btn svg{width:18px;height:18px}
+.chat-foot input[type=text]{
+  flex:1;padding:12px 14px;border-radius:10px;
   background:var(--preto);border:1px solid var(--borda-2);
-  color:#fff;font-size:.9rem;transition:.25s;
+  color:#fff;font-size:16px;transition:.25s;
+  min-height:44px;
 }
-.chat-foot input:focus{border-color:var(--vermelho)}
+.chat-foot input[type=text]:focus{border-color:var(--vermelho)}
 .chat-send{
-  width:46px;height:46px;border-radius:10px;flex-shrink:0;
+  width:44px;height:44px;border-radius:10px;flex-shrink:0;
   background:linear-gradient(135deg,var(--vermelho),var(--vermelho-esc));
-  display:grid;place-items:center;transition:.3s;
+  display:grid;place-items:center;color:#fff;transition:.25s;
 }
-.chat-send:hover{transform:scale(1.05);box-shadow:0 10px 24px -8px rgba(225,11,11,.9)}
+.chat-send:hover,.chat-send:active{transform:scale(1.05);box-shadow:0 10px 24px -8px rgba(225,11,11,.9)}
+.chat-send:active{transform:scale(.95)}
+.chat-send svg{width:18px;height:18px}
 
-/* MODAL ENTREGA */
+/* ========== PRODUCT DETAIL MODAL ========== */
+.pm{
+  position:fixed;inset:0;z-index:800;
+  background:rgba(0,0,0,.95);
+  display:none;
+  overflow-y:auto;overscroll-behavior:contain;
+}
+.pm.open{display:block;animation:fadeIn .25s ease}
+.pm-close{
+  position:fixed;top:16px;right:16px;z-index:10;
+  width:44px;height:44px;border-radius:12px;
+  background:rgba(5,5,5,.85);border:1px solid var(--borda-2);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  color:#fff;display:grid;place-items:center;transition:.25s;
+  top:calc(16px + env(safe-area-inset-top,0));
+}
+.pm-close:hover,.pm-close:active{background:var(--vermelho);border-color:var(--vermelho)}
+.pm-close:active{transform:scale(.94)}
+.pm-close svg{width:18px;height:18px}
+
+.pm-content{
+  max-width:1100px;margin:0 auto;padding:0;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+}
+.pm-gallery{
+  position:relative;
+  aspect-ratio:1/1;
+  max-height:55vh;
+  background:linear-gradient(145deg,#1a1a1a,#0a0a0a);
+  overflow:hidden;
+  touch-action:pan-y;
+  display:flex;align-items:center;justify-content:center;
+}
+.pm-slides{
+  display:flex;width:100%;height:100%;
+  transition:transform .4s cubic-bezier(.2,.8,.2,1);
+}
+.pm-slide{
+  min-width:100%;height:100%;
+  display:grid;place-items:center;
+  flex-shrink:0;
+}
+.pm-slide img{width:100%;height:100%;object-fit:contain}
+.pm-slide .pm-placeholder{
+  font-size:6rem;font-weight:900;color:var(--vermelho);
+  text-shadow:0 0 60px rgba(225,11,11,.8);
+}
+.pm-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(5,5,5,.7);border:1px solid var(--borda-2);
+  color:#fff;display:grid;place-items:center;
+  transition:.25s;backdrop-filter:blur(8px);
+}
+.pm-nav:hover,.pm-nav:active{background:var(--vermelho);border-color:var(--vermelho)}
+.pm-nav:active{transform:translateY(-50%) scale(.92)}
+.pm-nav svg{width:18px;height:18px}
+.pm-prev{left:10px}
+.pm-next{right:10px}
+.pm-dots{
+  position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
+  display:flex;gap:6px;padding:6px 10px;
+  background:rgba(5,5,5,.7);border-radius:100px;
+  backdrop-filter:blur(8px);border:1px solid var(--borda-2);
+}
+.pm-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:rgba(255,255,255,.35);transition:.3s;cursor:pointer;
+}
+.pm-dot.active{background:var(--vermelho);width:22px;border-radius:4px;box-shadow:0 0 10px var(--vermelho)}
+
+.pm-info{
+  padding:22px 20px 40px;
+  display:flex;flex-direction:column;gap:14px;
+}
+.pm-cat{
+  font-size:.68rem;text-transform:uppercase;letter-spacing:2px;
+  color:var(--vermelho-2);font-weight:800;
+}
+.pm-title{
+  font-size:clamp(1.3rem,4vw,1.9rem);
+  font-weight:900;line-height:1.2;letter-spacing:-.5px;
+}
+.pm-desc{
+  font-size:.9rem;color:var(--cinza);line-height:1.65;
+  white-space:pre-wrap;
+}
+.pm-price-row{
+  display:flex;align-items:baseline;gap:8px;
+  padding:14px 0;border-top:1px solid var(--borda);border-bottom:1px solid var(--borda);
+}
+.pm-price{font-size:1.9rem;font-weight:900;color:#fff}
+.pm-price small{font-size:.85rem;color:var(--vermelho-2);font-weight:800;margin-left:2px}
+.pm-actions{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+
+/* desktop split */
+@media (min-width:900px){
+  .pm.open{align-items:center;display:grid;place-items:center}
+  .pm-content{
+    max-width:1100px;
+    padding:0;margin:auto;
+    min-height:auto;max-height:90vh;
+    flex-direction:row;
+    background:linear-gradient(160deg,var(--preto-3),var(--preto-2));
+    border:1px solid var(--borda-2);
+    border-radius:20px;overflow:hidden;
+    box-shadow:0 40px 100px -20px rgba(0,0,0,.9);
+    animation:fadeUp .35s ease;
+  }
+  .pm-gallery{aspect-ratio:auto;width:55%;max-height:none;min-height:520px;flex-shrink:0}
+  .pm-info{
+    width:45%;padding:32px;
+    max-height:90vh;overflow-y:auto;
+  }
+}
+
+/* ========== DELIVERY MODAL ========== */
 .modal{
   position:fixed;inset:0;z-index:700;
-  display:grid;place-items:center;padding:20px;
+  display:grid;place-items:center;padding:16px;
   opacity:0;visibility:hidden;transition:.3s;
 }
 .modal.open{opacity:1;visibility:visible}
 .modal-card{
   background:linear-gradient(160deg,var(--preto-3),var(--preto-2));
   border:1px solid var(--vermelho);
-  border-radius:20px;padding:32px;
-  width:100%;max-width:460px;
-  box-shadow:0 40px 80px -30px rgba(0,0,0,.9), 0 0 60px -20px rgba(225,11,11,.6);
-  transform:scale(.9);transition:transform .35s cubic-bezier(.2,.8,.2,1);
+  border-radius:20px;padding:26px;
+  width:100%;max-width:440px;
+  box-shadow:0 40px 80px -30px rgba(0,0,0,.9),0 0 60px -20px rgba(225,11,11,.6);
+  transform:scale(.94);transition:transform .35s cubic-bezier(.2,.8,.2,1);
+  max-height:90vh;overflow-y:auto;
 }
 .modal.open .modal-card{transform:scale(1)}
 .modal-card h2{
-  font-size:1.15rem;font-weight:900;text-transform:uppercase;
-  letter-spacing:1.5px;margin-bottom:8px;
+  font-size:1.05rem;font-weight:900;text-transform:uppercase;
+  letter-spacing:1.2px;margin-bottom:6px;
 }
 .modal-card h2 span{color:var(--vermelho)}
-.delivery-note{font-size:.85rem;color:var(--cinza);margin-bottom:22px}
+.delivery-note{font-size:.78rem;color:var(--cinza);margin-bottom:18px}
 .cred-box{
   background:var(--preto);border:1px solid var(--borda-2);
-  border-radius:12px;padding:18px;margin-bottom:14px;
+  border-radius:12px;padding:14px;margin-bottom:12px;
 }
-.cred-row{margin-bottom:14px}
+.cred-row{margin-bottom:12px}
 .cred-row:last-child{margin-bottom:0}
 .cred-label{
-  display:block;font-size:.68rem;text-transform:uppercase;
-  letter-spacing:2px;color:var(--vermelho-2);margin-bottom:6px;font-weight:800;
+  display:block;font-size:.62rem;text-transform:uppercase;
+  letter-spacing:2px;color:var(--vermelho-2);margin-bottom:5px;font-weight:800;
 }
 .cred-value{
-  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
   background:var(--preto-3);border:1px solid var(--borda);
   border-radius:8px;padding:10px 12px;
-  font-family:'Courier New',monospace;font-size:.92rem;
+  font-family:'Courier New',monospace;font-size:.85rem;
   word-break:break-all;
 }
 .copy-btn{
-  padding:6px 12px;border-radius:6px;flex-shrink:0;
+  padding:6px 10px;border-radius:6px;flex-shrink:0;
   background:rgba(225,11,11,.14);border:1px solid var(--vermelho);
-  color:var(--vermelho-2);font-size:.68rem;font-weight:800;
+  color:var(--vermelho-2);font-size:.65rem;font-weight:800;
   text-transform:uppercase;letter-spacing:1px;transition:.25s;
 }
-.copy-btn:hover{background:var(--vermelho);color:#fff}
+.copy-btn:hover,.copy-btn:active{background:var(--vermelho);color:#fff}
 .delivery-msg{
   background:rgba(225,11,11,.06);border-left:3px solid var(--vermelho);
-  padding:14px 16px;border-radius:8px;margin-bottom:18px;
+  padding:12px 14px;border-radius:8px;margin-bottom:16px;
 }
 .delivery-msg h4{
-  font-size:.72rem;text-transform:uppercase;letter-spacing:2px;
-  color:var(--vermelho-2);margin-bottom:8px;
+  font-size:.68rem;text-transform:uppercase;letter-spacing:2px;
+  color:var(--vermelho-2);margin-bottom:6px;
 }
-.delivery-msg p{font-size:.85rem;color:#dcdcdc;line-height:1.6}
+.delivery-msg p{font-size:.82rem;color:#dcdcdc;line-height:1.6}
 
-/* TOAST */
+/* ========== IMAGE VIEWER ========== */
+.img-viewer{
+  position:fixed;inset:0;z-index:9000;
+  background:rgba(0,0,0,.95);
+  display:none;place-items:center;padding:20px;
+  cursor:zoom-out;animation:fadeIn .2s ease;
+}
+.img-viewer.open{display:grid}
+.img-viewer img{max-width:95vw;max-height:95vh;border-radius:8px}
+
+/* ========== TOAST ========== */
 .toast-container{
-  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
-  z-index:9000;display:flex;flex-direction:column;gap:10px;align-items:center;
-  pointer-events:none;
+  position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0));
+  left:50%;transform:translateX(-50%);
+  z-index:9999;display:flex;flex-direction:column;gap:8px;align-items:center;
+  pointer-events:none;width:calc(100% - 32px);max-width:420px;
 }
 .toast{
-  padding:14px 24px;border-radius:12px;
+  padding:12px 20px;border-radius:12px;
   background:var(--preto-3);border:1px solid var(--borda-2);
   border-left:3px solid var(--vermelho);
-  color:#fff;font-size:.88rem;font-weight:600;
-  box-shadow:0 14px 40px rgba(0,0,0,.7);
-  animation:toastIn .35s cubic-bezier(.2,.8,.2,1), toastOut .35s ease 3.4s forwards;
-  max-width:90vw;
+  color:#fff;font-size:.82rem;font-weight:600;
+  box-shadow:0 14px 40px rgba(0,0,0,.8);
+  animation:toastIn .35s cubic-bezier(.2,.8,.2,1),toastOut .35s ease 3.4s forwards;
+  width:100%;text-align:center;
 }
 .toast.success{border-left-color:#2ee06a}
 .toast.error{border-left-color:var(--vermelho-2)}
 
-/* FAB */
+/* ========== FAB ========== */
 .fab{
-  position:fixed;bottom:24px;right:24px;z-index:400;
-  width:58px;height:58px;border-radius:50%;
+  position:fixed;
+  bottom:calc(20px + env(safe-area-inset-bottom,0));
+  right:16px;z-index:400;
+  width:56px;height:56px;border-radius:50%;
   background:linear-gradient(135deg,var(--vermelho),var(--vermelho-esc));
   display:grid;place-items:center;color:#fff;
-  box-shadow:0 20px 40px -12px rgba(225,11,11,.9);
+  box-shadow:0 16px 40px -10px rgba(225,11,11,.9);
   transition:transform .3s;
   animation:float 4s ease-in-out infinite;
 }
-.fab:hover{transform:scale(1.1)}
+.fab:hover,.fab:active{transform:scale(1.08)}
+.fab:active{transform:scale(.95)}
+.fab svg{width:24px;height:24px}
 .fab .badge{top:-2px;right:-2px}
 
-/* RESPONSIVO */
-@media (max-width:960px){
-  .hero{grid-template-columns:1fr;padding-top:60px;gap:40px}
+/* ========== RESPONSIVO ========== */
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;padding:40px 20px 30px;gap:36px}
   .hero-card-inner{transform:none;animation:none}
-}
-@media (max-width:760px){
   .menu{display:none}
-  .nav{padding:14px 18px}
-  section{padding:60px 18px}
-  .hero{padding:50px 18px 40px}
+}
+@media (max-width:640px){
+  .nav{padding:12px 14px;gap:8px}
+  .logo-mark{width:34px;height:34px;font-size:1rem}
+  .logo-text{font-size:.85rem}
+  .logo-text small{font-size:.5rem;letter-spacing:2px}
+  .icon-btn{width:40px;height:40px}
+  .icon-btn svg{width:17px;height:17px}
+  section{padding:40px 14px}
+  .hero{padding:32px 14px 24px}
+  .hero h1{letter-spacing:-1px}
+  .grid-produtos{grid-template-columns:repeat(2,1fr);gap:10px}
+  .produto-info{padding:10px 10px 12px;gap:4px}
+  .produto-info h3{font-size:.78rem;line-height:1.25}
+  .produto-cat{font-size:.56rem;letter-spacing:1.2px}
+  .produto-preco{font-size:1rem}
+  .produto-preco small{font-size:.62rem}
+  .tag{font-size:.56rem;padding:4px 8px;top:8px;left:8px}
+  .hero-card-inner{padding:22px}
+  .hero-card-inner li{font-size:.82rem;gap:10px}
+  .hero-card-inner li::before{width:22px;height:22px;border-radius:6px}
+  .hero-card-inner li::after{left:7px;width:7px;height:3px}
   .panel{max-width:100%}
-  .footer-inner{flex-direction:column;gap:30px}
-  .fab{bottom:18px;right:18px;width:52px;height:52px}
+  .fab{width:52px;height:52px;bottom:calc(16px + env(safe-area-inset-bottom,0));right:12px}
+  .btn{padding:12px 22px;font-size:.8rem;min-height:44px}
+  .features{grid-template-columns:1fr}
+  .titulo-secao{margin-bottom:24px}
+  .checkout-section input{padding:11px 12px}
+  .cupom-row{flex-wrap:nowrap}
+  .cupom-aplicar{padding:0 14px;font-size:.7rem}
+  .pm-info{padding:18px 16px 32px}
+}
+@media (max-width:360px){
+  .grid-produtos{grid-template-columns:1fr}
+  .logo-text{font-size:.78rem}
 }
 </style>
 </head>
-<body>
+<body class="intro-active">
+
+<!-- INTRO NETFLIX-STYLE -->
+<div class="intro" id="intro">
+  <div class="intro-content">
+    <svg class="intro-n" viewBox="0 0 200 260">
+      <path class="draw-1" d="M30 240 L30 20"/>
+      <path class="draw-2" d="M170 20 L170 240"/>
+      <path class="draw-3" d="M30 20 L170 240"/>
+    </svg>
+    <div class="intro-text">NEXUS<span>STORE</span></div>
+  </div>
+</div>
 
 <div class="bg-glow"></div>
 
 <!-- HEADER -->
 <header>
-  <div class="topbar">NEXUS STORE • Produtos digitais e contas • Entrega imediata • Pagamento via PIX</div>
   <nav class="nav">
     <a href="#" class="logo">
-      <span class="logo-mark">N</span>
-      NEXUS<span>STORE</span>
+      <div class="logo-mark">N</div>
+      <div class="logo-text">
+        NEXUS<span>STORE</span>
+        <small>DIGITAL & CONTAS</small>
+      </div>
     </a>
 
     <ul class="menu">
       <li><a href="#produtos">Produtos</a></li>
-      <li><a href="#como-funciona">Como funciona</a></li>
-      <li><a href="#contato">Contato</a></li>
+      <li><a href="#sobre">Sobre</a></li>
     </ul>
 
     <div class="acoes">
-      <button class="icon-btn" id="btnMessages" title="Mensagens">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <button class="icon-btn" id="btnMessages" aria-label="Mensagens">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
           <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
         </svg>
         <span class="badge" id="badgeMessages">0</span>
       </button>
 
-      <button class="icon-btn" id="btnChat" title="Suporte">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-        </svg>
-        <span class="badge" id="badgeChat">0</span>
-      </button>
-
-      <button class="icon-btn" id="btnCart" title="Carrinho">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="9" cy="21" r="1"/>
-          <circle cx="20" cy="21" r="1"/>
-          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+      <button class="icon-btn" id="btnCart" aria-label="Carrinho">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
         </svg>
         <span class="badge" id="badgeCart">0</span>
       </button>
@@ -739,24 +960,22 @@ footer{
   <!-- HERO -->
   <section class="hero">
     <div>
-      <span class="hero-tag">Nexus Store • Digital</span>
-      <h1>Loja de <em>produtos digitais</em> e contas.</h1>
-      <p class="hero-sub">Chaves, licenças, assinaturas e contas premium com entrega rápida e segura.</p>
-      <p>Compre, pague via PIX e receba suas credenciais direto na sua caixa de mensagens. Rápido, seguro e sem burocracia.</p>
+      <span class="hero-badge">Entrega imediata</span>
+      <h1>Produtos digitais e <em>contas premium</em>.</h1>
+      <p>Compre, pague via PIX e receba suas credenciais direto na caixa de mensagens.</p>
       <div class="hero-btns">
         <a href="#produtos" class="btn btn-primario">Ver produtos</a>
-        <a href="#como-funciona" class="btn btn-secundario">Como funciona</a>
+        <a href="#sobre" class="btn btn-secundario">Como funciona</a>
       </div>
     </div>
 
     <div class="hero-card">
       <div class="hero-card-inner">
-        <h3>Por que a Nexus Store?</h3>
         <ul>
-          <li>Entrega via mensagem após aprovação</li>
-          <li>Suporte humano via chat integrado</li>
-          <li>Pagamento seguro por PIX</li>
-          <li>Credenciais protegidas e copiáveis</li>
+          <li>Entrega automática</li>
+          <li>Suporte no chat</li>
+          <li>Pagamento PIX</li>
+          <li>Credenciais seguras</li>
         </ul>
       </div>
     </div>
@@ -768,7 +987,6 @@ footer{
       <div class="titulo-secao">
         <span>Catálogo</span>
         <h2>Produtos disponíveis</h2>
-        <p>Produtos digitais e contas prontos para entrega.</p>
       </div>
       <div class="grid-produtos" id="produtosGrid">
         <div class="loading"><div class="spinner"></div></div>
@@ -776,116 +994,106 @@ footer{
     </div>
   </section>
 
-  <!-- COMO FUNCIONA -->
-  <section id="como-funciona">
+  <!-- FEATURES -->
+  <section id="sobre">
     <div class="container">
-      <div class="titulo-secao">
-        <span>Passo a passo</span>
-        <h2>Como funciona a compra</h2>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">01</div>
-          <h4>Escolha o produto</h4>
-          <p>Navegue pelo catálogo de produtos digitais e contas e adicione os itens ao carrinho.</p>
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+          </div>
+          <h4>Entrega Rápida</h4>
+          <p>Direto na sua caixa</p>
         </div>
-        <div class="step">
-          <div class="step-num">02</div>
-          <h4>Pague via PIX</h4>
-          <p>Copie a chave PIX exibida no carrinho e realize o pagamento.</p>
+        <div class="feature">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h4>Pagamento Seguro</h4>
+          <p>100% protegido</p>
         </div>
-        <div class="step">
-          <div class="step-num">03</div>
-          <h4>Envie o comprovante</h4>
-          <p>Faça o upload da imagem do comprovante e confirme o pedido.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">04</div>
-          <h4>Receba as credenciais</h4>
-          <p>Aguarde a aprovação. As credenciais chegam na sua caixa de mensagens.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTATO -->
-  <section id="contato" style="padding-top:0">
-    <div class="container">
-      <div class="titulo-secao">
-        <span>Suporte</span>
-        <h2>Ficou com dúvidas?</h2>
-        <p>Fale com nosso time pelo chat integrado. Responderemos o quanto antes.</p>
-        <div style="margin-top:24px">
-          <button class="btn btn-primario" onclick="openChat()">Abrir chat de suporte</button>
+        <div class="feature">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <h4>Suporte Real</h4>
+          <p>Chat integrado 24/7</p>
         </div>
       </div>
     </div>
   </section>
 </main>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div>
-      <a href="#" class="logo" style="font-size:1.2rem">
-        <span class="logo-mark" style="width:28px;height:28px">N</span>
-        NEXUS<span>STORE</span>
-      </a>
-      <p>NEXUS STORE — loja de produtos digitais e contas. Chaves, licenças, assinaturas e contas premium com entrega segura e suporte dedicado.</p>
-    </div>
-    <div class="footer-cols">
-      <div>
-        <h5>Loja</h5>
-        <a href="#produtos">Produtos</a>
-        <a href="#como-funciona">Como funciona</a>
-        <a href="#" onclick="openChat();return false">Suporte</a>
-      </div>
-      <div>
-        <h5>Conta</h5>
-        <a href="#" onclick="openMessages();return false">Minhas mensagens</a>
-        <a href="#" onclick="openCart();return false">Meu carrinho</a>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2025 NEXUS STORE — Produtos digitais e contas. Todos os direitos reservados.</span>
-    <span>Pagamentos via PIX • Suporte 24/7</span>
+    <a href="#" class="logo" style="justify-content:center;display:inline-flex">
+      <div class="logo-mark" style="width:32px;height:32px;font-size:.95rem">N</div>
+      <div class="logo-text" style="font-size:.9rem">NEXUS<span>STORE</span></div>
+    </a>
+    <p>Loja de produtos digitais e contas.</p>
+    <div class="footer-bottom">© 2025 NEXUS STORE — Todos os direitos reservados</div>
   </div>
 </footer>
 
 <!-- OVERLAY -->
 <div class="overlay" id="overlay"></div>
 
-<!-- PAINEL CARRINHO -->
+<!-- CARRINHO -->
 <aside class="panel" id="cartPanel">
   <div class="panel-head">
     <h2>Carrinho <span>Nexus</span></h2>
-    <button class="close-btn" onclick="closeAll()">×</button>
+    <button class="close-btn" onclick="closeAll()" aria-label="Fechar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
   </div>
   <div class="panel-body" id="cartBody"></div>
   <div class="panel-foot" id="cartFoot"></div>
 </aside>
 
-<!-- PAINEL MENSAGENS -->
+<!-- MENSAGENS -->
 <aside class="panel" id="messagesPanel">
   <div class="panel-head">
-    <h2>Minhas <span>Mensagens</span></h2>
-    <button class="close-btn" onclick="closeAll()">×</button>
+    <h2>Mensagens <span>Nexus</span></h2>
+    <button class="close-btn" onclick="closeAll()" aria-label="Fechar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
   </div>
   <div class="panel-body" id="messagesBody"></div>
 </aside>
 
-<!-- PAINEL CHAT -->
+<!-- CHAT -->
 <aside class="panel" id="chatPanel">
   <div class="panel-head">
     <h2>Suporte <span>Nexus</span></h2>
-    <button class="close-btn" onclick="closeAll()">×</button>
+    <button class="close-btn" onclick="closeAll()" aria-label="Fechar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
   </div>
   <div class="chat-body" id="chatBody"></div>
   <div class="chat-foot">
-    <input type="text" id="chatInput" placeholder="Digite sua mensagem..." onkeydown="if(event.key==='Enter')sendChat()">
-    <button class="chat-send" onclick="sendChat()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <button class="chat-img-btn" id="chatImgBtn" aria-label="Anexar imagem">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+        <circle cx="8.5" cy="8.5" r="1.5"/>
+        <polyline points="21 15 16 10 5 21"/>
+      </svg>
+    </button>
+    <input type="file" id="chatImgFile" accept="image/*" hidden>
+    <input type="text" id="chatInput" placeholder="Digite..." onkeydown="if(event.key==='Enter'){event.preventDefault();sendChat()}">
+    <button class="chat-send" onclick="sendChat()" aria-label="Enviar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <line x1="22" y1="2" x2="11" y2="13"/>
         <polygon points="22 2 15 22 11 13 2 9 22 2"/>
       </svg>
@@ -893,19 +1101,63 @@ footer{
   </div>
 </aside>
 
-<!-- MODAL ENTREGA -->
-<div class="modal" id="deliveryModal">
-  <div class="modal-card">
-    <h2>Suas <span>credenciais</span></h2>
-    <p class="delivery-note">Aqui estão os dados de acesso do seu pedido. Guarde com segurança.</p>
-    <div id="deliveryContent"></div>
-    <button class="btn btn-primario btn-block" style="margin-top:18px" onclick="closeDelivery()">Entendi</button>
+<!-- PRODUCT DETAIL MODAL -->
+<div class="pm" id="productModal">
+  <button class="pm-close" onclick="closeProduct()" aria-label="Fechar">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+
+  <div class="pm-content">
+    <div class="pm-gallery" id="pmGallery">
+      <div class="pm-slides" id="pmSlides"></div>
+      <button class="pm-nav pm-prev" id="pmPrev" aria-label="Anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+      <button class="pm-nav pm-next" id="pmNext" aria-label="Próxima">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+      <div class="pm-dots" id="pmDots"></div>
+    </div>
+
+    <div class="pm-info">
+      <span class="pm-cat" id="pmCat"></span>
+      <h2 class="pm-title" id="pmTitle"></h2>
+      <p class="pm-desc" id="pmDesc"></p>
+      <div class="pm-price-row">
+        <span class="pm-price" id="pmPrice"></span>
+      </div>
+      <div class="pm-actions">
+        <button class="btn btn-primario btn-block" id="pmAddBtn">Adicionar ao carrinho</button>
+        <button class="btn btn-secundario btn-block" id="pmChatBtn">Falar com suporte</button>
+      </div>
+    </div>
   </div>
 </div>
 
+<!-- DELIVERY MODAL -->
+<div class="modal" id="deliveryModal">
+  <div class="modal-card">
+    <h2>Suas <span>credenciais</span></h2>
+    <p class="delivery-note">Guarde com segurança.</p>
+    <div id="deliveryContent"></div>
+    <button class="btn btn-primario btn-block" style="margin-top:16px" onclick="closeDelivery()">Entendi</button>
+  </div>
+</div>
+
+<!-- IMAGE VIEWER -->
+<div class="img-viewer" id="imgViewer" onclick="this.classList.remove('open')">
+  <img id="imgViewerSrc" src="" alt="">
+</div>
+
 <!-- FAB -->
-<button class="fab" onclick="openChat()" title="Suporte">
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<button class="fab" onclick="openChat()" aria-label="Suporte">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
   </svg>
   <span class="badge" id="fabBadge">0</span>
@@ -942,14 +1194,9 @@ const CLIENTE_ID = getClienteId();
 
 /* UTIL */
 const $ = id => document.getElementById(id);
-function escapeHtml(s){
-  if (s == null) return '';
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-function formatPreco(n){
-  const v = Number(n) || 0;
-  return v.toFixed(2).replace('.', ',');
-}
+const escapeHtml = s => s == null ? '' : String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const formatPreco = n => (Number(n)||0).toFixed(2).replace('.', ',');
+
 function showToast(msg, type){
   const t = document.createElement('div');
   t.className = 'toast' + (type ? ' ' + type : '');
@@ -957,42 +1204,71 @@ function showToast(msg, type){
   $('toastContainer').appendChild(t);
   setTimeout(() => t.remove(), 4000);
 }
-function attachTilt(el){
-  if (window.matchMedia('(hover: none)').matches) return;
-  el.addEventListener('mousemove', e => {
-    const r = el.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width - 0.5;
-    const y = (e.clientY - r.top) / r.height - 0.5;
-    el.style.transform = `perspective(900px) rotateY(${x*9}deg) rotateX(${-y*9}deg) translateY(-8px)`;
+
+function fileToBase64(file, maxMB = 5){
+  return new Promise((resolve, reject) => {
+    if (!file.type.startsWith('image/')) return reject('Tipo inválido');
+    if (file.size > maxMB * 1024 * 1024) return reject(`Imagem maior que ${maxMB}MB`);
+    const reader = new FileReader();
+    reader.onload = e => resolve(e.target.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
   });
-  el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+}
+
+function openImg(src){
+  $('imgViewerSrc').src = src;
+  $('imgViewer').classList.add('open');
+}
+
+/* INTRO */
+if (!sessionStorage.getItem('nexusIntro')){
+  setTimeout(() => {
+    $('intro').classList.add('fade-out');
+    setTimeout(() => {
+      $('intro').remove();
+      document.body.classList.remove('intro-active');
+    }, 500);
+  }, 2500);
+  sessionStorage.setItem('nexusIntro', '1');
+} else {
+  $('intro').remove();
+  document.body.classList.remove('intro-active');
 }
 
 /* ESTADO */
 let produtos = [];
 let pixList = [];
 let cart = [];
+let cupomAplicado = null;
 let pedidosCliente = [];
 let chatData = null;
 let receiptData = null;
+let currentProduct = null;
+let currentSlide = 0;
 
 try { cart = JSON.parse(localStorage.getItem('nexusCart') || '[]'); } catch(e){ cart = []; }
 if (!Array.isArray(cart)) cart = [];
 
-function saveCart(){ localStorage.setItem('nexusCart', JSON.stringify(cart)); }
+try { cupomAplicado = JSON.parse(localStorage.getItem('nexusCupom') || 'null'); } catch(e){ cupomAplicado = null; }
 
-/* RENDER PRODUTOS */
+function saveCart(){
+  localStorage.setItem('nexusCart', JSON.stringify(cart));
+  localStorage.setItem('nexusCupom', JSON.stringify(cupomAplicado));
+}
+
+/* PRODUTOS */
 function renderProdutos(){
   const el = $('produtosGrid');
   if (!produtos.length){
-    el.innerHTML = `<div class="empty-state">Nenhum produto disponível no momento.</div>`;
+    el.innerHTML = `<div class="empty-state">Nenhum produto disponível.</div>`;
     return;
   }
   el.innerHTML = produtos.map((p, i) => {
     const foto = p.fotos && p.fotos[0];
     const inicial = (p.titulo || 'P').trim().charAt(0).toUpperCase();
     return `
-      <article class="produto" data-id="${p.id}" style="animation-delay:${Math.min(i*60,400)}ms">
+      <article class="produto" data-id="${p.id}" style="animation-delay:${Math.min(i*40,300)}ms">
         <div class="produto-img">
           ${foto ? `<img src="${foto}" alt="${escapeHtml(p.titulo)}" loading="lazy">` : `<div class="placeholder">${escapeHtml(inicial)}</div>`}
           ${p.desconto ? `<span class="tag">-${p.desconto}%</span>` : ''}
@@ -1000,24 +1276,132 @@ function renderProdutos(){
         <div class="produto-info">
           <span class="produto-cat">${escapeHtml(p.categoria || 'Digital')}</span>
           <h3>${escapeHtml(p.titulo || '')}</h3>
-          <p class="produto-desc">${escapeHtml(p.descricao || '')}</p>
-          <div class="precos">
-            <span class="preco">R$ ${formatPreco(p.preco)}</span>
-          </div>
-          <button class="btn-comprar" data-id="${p.id}">Adicionar ao carrinho</button>
+          <div class="produto-preco">R$ ${formatPreco(p.preco)}<small>PIX</small></div>
         </div>
       </article>
     `;
   }).join('');
 
-  el.querySelectorAll('.btn-comprar').forEach(b => {
-    b.addEventListener('click', e => {
-      e.stopPropagation();
-      addToCart(b.dataset.id);
-    });
+  el.querySelectorAll('.produto').forEach(card => {
+    card.addEventListener('click', () => openProduct(card.dataset.id));
   });
-  el.querySelectorAll('.produto').forEach(attachTilt);
 }
+
+/* PRODUCT DETAIL */
+function openProduct(id){
+  const p = produtos.find(x => x.id === id);
+  if (!p) return;
+  currentProduct = p;
+  currentSlide = 0;
+
+  const fotos = (p.fotos || []).filter(Boolean);
+  const inicial = (p.titulo || 'P').trim().charAt(0).toUpperCase();
+
+  const slidesHtml = fotos.length
+    ? fotos.map(f => `<div class="pm-slide"><img src="${f}" alt=""></div>`).join('')
+    : `<div class="pm-slide"><div class="pm-placeholder">${escapeHtml(inicial)}</div></div>`;
+
+  $('pmSlides').innerHTML = slidesHtml;
+  $('pmDots').innerHTML = fotos.length > 1
+    ? fotos.map((_, i) => `<span class="pm-dot ${i===0?'active':''}" data-i="${i}"></span>`).join('')
+    : '';
+
+  $('pmCat').textContent = p.categoria || 'Digital';
+  $('pmTitle').textContent = p.titulo || '';
+  $('pmDesc').textContent = p.descricao || 'Produto digital pronto para entrega.';
+  $('pmPrice').innerHTML = `R$ ${formatPreco(p.preco)}<small>PIX</small>`;
+
+  const pmPrev = $('pmPrev');
+  const pmNext = $('pmNext');
+  if (fotos.length > 1){
+    pmPrev.style.display = 'grid';
+    pmNext.style.display = 'grid';
+  } else {
+    pmPrev.style.display = 'none';
+    pmNext.style.display = 'none';
+  }
+
+  updateSlides();
+  $('productModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeProduct(){
+  $('productModal').classList.remove('open');
+  document.body.style.overflow = '';
+  currentProduct = null;
+}
+window.closeProduct = closeProduct;
+
+function updateSlides(){
+  if (!currentProduct) return;
+  const fotos = (currentProduct.fotos || []).filter(Boolean);
+  const total = Math.max(1, fotos.length);
+  const offset = -currentSlide * 100;
+  $('pmSlides').style.transform = `translateX(${offset}%)`;
+  document.querySelectorAll('.pm-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === currentSlide);
+  });
+}
+
+function nextSlide(){
+  if (!currentProduct) return;
+  const fotos = (currentProduct.fotos || []).filter(Boolean);
+  if (fotos.length <= 1) return;
+  currentSlide = (currentSlide + 1) % fotos.length;
+  updateSlides();
+}
+function prevSlide(){
+  if (!currentProduct) return;
+  const fotos = (currentProduct.fotos || []).filter(Boolean);
+  if (fotos.length <= 1) return;
+  currentSlide = (currentSlide - 1 + fotos.length) % fotos.length;
+  updateSlides();
+}
+
+$('pmPrev').addEventListener('click', e => { e.stopPropagation(); prevSlide(); });
+$('pmNext').addEventListener('click', e => { e.stopPropagation(); nextSlide(); });
+
+$('pmDots').addEventListener('click', e => {
+  const dot = e.target.closest('.pm-dot');
+  if (!dot) return;
+  currentSlide = parseInt(dot.dataset.i) || 0;
+  updateSlides();
+});
+
+/* swipe touch */
+(function(){
+  const gallery = $('pmGallery');
+  let startX = 0, curX = 0;
+  gallery.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    curX = startX;
+  }, { passive: true });
+  gallery.addEventListener('touchmove', e => {
+    curX = e.touches[0].clientX;
+  }, { passive: true });
+  gallery.addEventListener('touchend', () => {
+    const diff = startX - curX;
+    if (Math.abs(diff) > 50){
+      if (diff > 0) nextSlide();
+      else prevSlide();
+    }
+  });
+})();
+
+/* botão add no modal */
+$('pmAddBtn').addEventListener('click', () => {
+  if (currentProduct){
+    addToCart(currentProduct.id);
+    closeProduct();
+  }
+});
+
+/* botão chat no modal */
+$('pmChatBtn').addEventListener('click', () => {
+  closeProduct();
+  openChat();
+});
 
 /* CARRINHO */
 function addToCart(produtoId){
@@ -1029,32 +1413,50 @@ function addToCart(produtoId){
   saveCart();
   renderCart();
   updateBadges();
-  showToast('Adicionado ao carrinho!', 'success');
+  showToast('Adicionado!', 'success');
 }
+window.addToCart = addToCart;
+
 function changeQty(idx, delta){
   if (!cart[idx]) return;
   cart[idx].qtd = Math.max(1, cart[idx].qtd + delta);
   saveCart(); renderCart(); updateBadges();
 }
+window.changeQty = changeQty;
+
 function removeItem(idx){
   cart.splice(idx, 1);
+  if (!cart.length) cupomAplicado = null;
   saveCart(); renderCart(); updateBadges();
+}
+window.removeItem = removeItem;
+
+function calcSubtotal(){
+  return cart.reduce((s, i) => s + (Number(i.preco) || 0) * i.qtd, 0);
+}
+function calcDesconto(subtotal){
+  if (!cupomAplicado) return 0;
+  const v = Number(cupomAplicado.valor) || 0;
+  if (cupomAplicado.tipo === 'porcento'){
+    return Math.min(subtotal, subtotal * (v / 100));
+  }
+  return Math.min(subtotal, v);
 }
 
 function renderPixListHtml(){
   if (!pixList.length){
-    return `<div class="pix-empty">Nenhuma chave PIX cadastrada. Abra o suporte para mais informações.</div>`;
+    return `<div class="pix-empty">PIX indisponível</div>`;
   }
   return pixList.map((p, i) => `
     <div class="pix-item">
       <div class="pix-key-row">
         <div style="min-width:0">
-          <span class="pix-label">${escapeHtml(p.nome || 'Chave PIX ' + (i+1))}</span>
+          <span class="pix-label">${escapeHtml(p.nome || 'PIX ' + (i+1))}</span>
           <span class="pix-key">${escapeHtml(p.chave || '')}</span>
         </div>
         <button class="copy-pix" data-chave="${escapeHtml(p.chave || '')}">Copiar</button>
       </div>
-      ${p.qr ? `<div class="pix-qr"><img src="${p.qr}" alt="QR Code PIX"></div>` : ''}
+      ${p.qr ? `<div class="pix-qr"><img src="${p.qr}" alt="QR PIX"></div>` : ''}
     </div>
   `).join('');
 }
@@ -1064,13 +1466,25 @@ function renderCart(){
   const foot = $('cartFoot');
 
   if (!cart.length){
-    body.innerHTML = `<div class="empty-state">Seu carrinho está vazio.<br><br>
-      <button class="btn btn-secundario" onclick="closeAll()">Continuar comprando</button></div>`;
+    body.innerHTML = `<div class="empty-state">Carrinho vazio.<br><br>
+      <button class="btn btn-secundario" onclick="closeAll()">Voltar</button></div>`;
     foot.innerHTML = '';
     return;
   }
 
-  const total = cart.reduce((s, i) => s + (Number(i.preco) || 0) * i.qtd, 0);
+  const subtotal = calcSubtotal();
+  const desconto = calcDesconto(subtotal);
+  const total = Math.max(0, subtotal - desconto);
+
+  const cupomHtml = cupomAplicado
+    ? `<div class="cupom-ok">
+         <span>Cupom <strong>${escapeHtml(cupomAplicado.codigo)}</strong> aplicado</span>
+         <button onclick="removerCupom()">Remover</button>
+       </div>`
+    : `<div class="cupom-row">
+         <input type="text" id="cupomInput" placeholder="CUPOM" maxlength="30">
+         <button class="cupom-aplicar" onclick="aplicarCupom()">Aplicar</button>
+       </div>`;
 
   body.innerHTML = `
     <div class="cart-items">
@@ -1099,31 +1513,36 @@ function renderCart(){
     </div>
 
     <div class="checkout-section">
-      <h3>Dados para entrega</h3>
-      <input type="text" id="cliNome" placeholder="Seu nome completo" value="${escapeHtml(localStorage.getItem('nexusNome') || '')}">
-      <input type="email" id="cliEmail" placeholder="Seu e-mail" value="${escapeHtml(localStorage.getItem('nexusEmail') || '')}">
+      <h3>Cupom</h3>
+      ${cupomHtml}
     </div>
 
     <div class="checkout-section">
-      <h3>Pagamento via PIX</h3>
-      <div id="pixListWrap">${renderPixListHtml()}</div>
+      <h3>Seus dados</h3>
+      <input type="text" id="cliNome" placeholder="Nome" value="${escapeHtml(localStorage.getItem('nexusNome') || '')}">
+      <input type="email" id="cliEmail" placeholder="E-mail" value="${escapeHtml(localStorage.getItem('nexusEmail') || '')}">
     </div>
 
     <div class="checkout-section">
-      <h3>Comprovante de pagamento</h3>
+      <h3>PIX</h3>
+      <div>${renderPixListHtml()}</div>
+    </div>
+
+    <div class="checkout-section">
+      <h3>Comprovante</h3>
       <label class="upload-box" for="fileReceipt">
         <input type="file" id="fileReceipt" accept="image/*" hidden>
         <div id="uploadPreview" class="${receiptData ? 'has-file' : ''}">
           ${receiptData
-            ? `<img src="${receiptData}" alt="Comprovante"><span>Comprovante anexado. Clique para trocar.</span>`
+            ? `<img src="${receiptData}" alt=""><span>Comprovante anexado. Toque para trocar.</span>`
             : `<div class="upload-icon">
-                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                    <polyline points="17 8 12 3 7 8"/>
                    <line x1="12" y1="3" x2="12" y2="15"/>
                  </svg>
                </div>
-               <span>Clique para enviar o comprovante</span>`
+               <span>Enviar comprovante</span>`
           }
         </div>
       </label>
@@ -1131,9 +1550,10 @@ function renderCart(){
   `;
 
   foot.innerHTML = `
-    <div class="total-row">
-      <span>Total</span>
-      <strong>R$ ${formatPreco(total)}</strong>
+    <div class="totais">
+      <div class="total-line"><span>Subtotal</span><span>R$ ${formatPreco(subtotal)}</span></div>
+      ${desconto > 0 ? `<div class="total-line desc"><span>Desconto</span><span>-R$ ${formatPreco(desconto)}</span></div>` : ''}
+      <div class="total-line final"><span>Total</span><strong>R$ ${formatPreco(total)}</strong></div>
     </div>
     <button class="btn btn-primario btn-block" id="btnConfirmar">Confirmar pagamento</button>
   `;
@@ -1146,10 +1566,8 @@ function renderCart(){
 
   body.querySelectorAll('.copy-pix').forEach(b => {
     b.addEventListener('click', () => {
-      const chave = b.dataset.chave;
-      if (!chave) return;
-      navigator.clipboard.writeText(chave).then(() => showToast('Chave PIX copiada!', 'success'))
-        .catch(() => showToast('Não foi possível copiar.', 'error'));
+      navigator.clipboard.writeText(b.dataset.chave || '').then(() => showToast('Copiado!', 'success'))
+        .catch(() => showToast('Erro.', 'error'));
     });
   });
 }
@@ -1157,39 +1575,84 @@ function renderCart(){
 function handleReceipt(e){
   const file = e.target.files && e.target.files[0];
   if (!file) return;
-  if (!file.type.startsWith('image/')) return showToast('Envie uma imagem válida.', 'error');
-  if (file.size > 3 * 1024 * 1024) return showToast('Imagem muito grande (máx 3MB).', 'error');
+  if (!file.type.startsWith('image/')) return showToast('Imagem inválida.', 'error');
+  if (file.size > 3 * 1024 * 1024) return showToast('Máx 3MB.', 'error');
   const reader = new FileReader();
   reader.onload = ev => {
     receiptData = ev.target.result;
     const prev = $('uploadPreview');
     if (prev){
-      prev.innerHTML = `<img src="${receiptData}" alt="Comprovante"><span>Comprovante anexado. Clique para trocar.</span>`;
+      prev.innerHTML = `<img src="${receiptData}" alt=""><span>Comprovante anexado. Toque para trocar.</span>`;
       prev.classList.add('has-file');
     }
   };
   reader.readAsDataURL(file);
 }
 
-async function confirmarPedido(){
-  const nome = ($('cliNome').value || '').trim();
-  const email = ($('cliEmail').value || '').trim();
+async function aplicarCupom(){
+  const input = $('cupomInput');
+  if (!input) return;
+  const codigo = (input.value || '').trim().toUpperCase();
+  if (!codigo) return showToast('Digite um cupom.', 'error');
 
-  if (!nome) return showToast('Informe seu nome.', 'error');
-  if (!email || !email.includes('@')) return showToast('Informe um e-mail válido.', 'error');
-  if (!pixList.length) return showToast('Nenhuma chave PIX disponível no momento.', 'error');
-  if (!receiptData) return showToast('Anexe o comprovante de pagamento.', 'error');
+  try {
+    const snap = await get(ref(db, 'cupons'));
+    let encontrado = null;
+    snap.forEach(c => {
+      const v = c.val();
+      if (v && v.ativo && String(v.codigo || '').toUpperCase() === codigo){
+        encontrado = { id: c.key, codigo: v.codigo, tipo: v.tipo, valor: Number(v.valor) || 0 };
+      }
+    });
+
+    if (!encontrado){
+      showToast('Cupom inválido.', 'error');
+      return;
+    }
+
+    cupomAplicado = encontrado;
+    saveCart();
+    renderCart();
+    showToast('Cupom aplicado!', 'success');
+  } catch(e){
+    console.error(e);
+    showToast('Erro ao verificar.', 'error');
+  }
+}
+window.aplicarCupom = aplicarCupom;
+
+function removerCupom(){
+  cupomAplicado = null;
+  saveCart();
+  renderCart();
+  showToast('Cupom removido.', 'success');
+}
+window.removerCupom = removerCupom;
+
+async function confirmarPedido(){
+  const nome = ($('cliNome')?.value || '').trim();
+  const email = ($('cliEmail')?.value || '').trim();
+
+  if (!nome) return showToast('Informe o nome.', 'error');
+  if (!email || !email.includes('@')) return showToast('E-mail inválido.', 'error');
+  if (!pixList.length) return showToast('PIX indisponível.', 'error');
+  if (!receiptData) return showToast('Anexe o comprovante.', 'error');
 
   localStorage.setItem('nexusNome', nome);
   localStorage.setItem('nexusEmail', email);
 
-  const total = cart.reduce((s, i) => s + (Number(i.preco) || 0) * i.qtd, 0);
+  const subtotal = calcSubtotal();
+  const desconto = calcDesconto(subtotal);
+  const total = Math.max(0, subtotal - desconto);
 
   const novoPedido = {
     clienteId: CLIENTE_ID,
     clienteNome: nome,
     clienteEmail: email,
     itens: cart.map(i => ({ titulo: i.titulo, preco: Number(i.preco) || 0, qtd: i.qtd })),
+    subtotal: Number(subtotal.toFixed(2)),
+    desconto: Number(desconto.toFixed(2)),
+    cupomCodigo: cupomAplicado ? cupomAplicado.codigo : null,
     total: Number(total.toFixed(2)),
     status: 'aguardando_aprovacao',
     comprovante: receiptData,
@@ -1201,15 +1664,16 @@ async function confirmarPedido(){
     const novoRef = push(ref(db, 'pedidos'));
     await set(novoRef, novoPedido);
     cart = [];
+    cupomAplicado = null;
     receiptData = null;
     saveCart();
     renderCart();
     updateBadges();
     closeAll();
-    showToast('Pagamento enviado! Aguarde a aprovação.', 'success');
+    showToast('Pagamento enviado!', 'success');
   } catch(err){
     console.error(err);
-    showToast('Erro ao enviar pedido. Tente novamente.', 'error');
+    showToast('Erro. Tente novamente.', 'error');
   }
 }
 
@@ -1217,26 +1681,25 @@ async function confirmarPedido(){
 function renderMessages(){
   const el = $('messagesBody');
   if (!pedidosCliente.length){
-    el.innerHTML = `<div class="empty-state">Você ainda não realizou nenhum pedido.<br><br>
-      <button class="btn btn-secundario" onclick="closeAll();document.getElementById('produtos').scrollIntoView()">Ver produtos</button></div>`;
+    el.innerHTML = `<div class="empty-state">Nenhum pedido ainda.<br><br>
+      <button class="btn btn-secundario" onclick="closeAll()">Ver produtos</button></div>`;
     return;
   }
 
   const labels = {
-    aguardando_aprovacao: 'Aguardando aprovação',
+    aguardando_aprovacao: 'Aguardando',
     em_atendimento: 'Em atendimento',
     concluido: 'Concluído'
   };
 
   el.innerHTML = pedidosCliente.map(p => {
-    const statusLabel = labels[p.status] || p.status;
     const unread = p.status === 'concluido' && p.vistoCliente === false;
     const data = p.criadoEm ? new Date(p.criadoEm).toLocaleDateString('pt-BR') : '';
     return `
       <div class="order-card ${unread ? 'unread' : ''}">
         <div class="order-head">
           <div>
-            <span class="order-status status-${p.status}">${statusLabel}</span>
+            <span class="order-status status-${p.status}">${labels[p.status] || p.status}</span>
             <span class="order-date">${data}</span>
           </div>
           <span class="order-total">R$ ${formatPreco(p.total)}</span>
@@ -1246,11 +1709,7 @@ function renderMessages(){
         </div>
         ${p.status === 'concluido'
           ? `<button class="btn-ver" data-id="${p.id}">Ver credenciais</button>`
-          : `<div style="font-size:.78rem;color:var(--cinza);text-align:center;padding:6px 0">${
-              p.status === 'aguardando_aprovacao'
-                ? 'Seu comprovante está sendo analisado.'
-                : 'Seu pedido está em atendimento.'
-            }</div>`
+          : `<div class="order-pending">${p.status === 'aguardando_aprovacao' ? 'Analisando comprovante' : 'Preparando entrega'}</div>`
         }
       </div>
     `;
@@ -1286,13 +1745,7 @@ function openDelivery(id){
         </div>
       </div>
     </div>
-    ${p.entregaMensagem
-      ? `<div class="delivery-msg">
-           <h4>Mensagem do suporte</h4>
-           <p>${escapeHtml(p.entregaMensagem).replace(/\n/g, '<br>')}</p>
-         </div>`
-      : ''
-    }
+    ${p.entregaMensagem ? `<div class="delivery-msg"><h4>Mensagem</h4><p>${escapeHtml(p.entregaMensagem).replace(/\n/g, '<br>')}</p></div>` : ''}
   `;
 
   $('deliveryModal').classList.add('open');
@@ -1301,7 +1754,7 @@ function openDelivery(id){
   document.querySelectorAll('#deliveryContent .copy-btn').forEach(b => {
     b.addEventListener('click', () => {
       navigator.clipboard.writeText(b.dataset.copy || '').then(() => showToast('Copiado!', 'success'))
-        .catch(() => showToast('Erro ao copiar.', 'error'));
+        .catch(() => showToast('Erro.', 'error'));
     });
   });
 }
@@ -1310,6 +1763,7 @@ function closeDelivery(){
   $('deliveryModal').classList.remove('open');
   $('overlay').classList.remove('active');
 }
+window.closeDelivery = closeDelivery;
 
 /* CHAT */
 function renderChat(){
@@ -1320,16 +1774,20 @@ function renderChat(){
     : [];
 
   if (!msgs.length){
-    el.innerHTML = `<div class="chat-empty">Envie sua primeira mensagem.<br>Nosso time responde o mais rápido possível.</div>`;
+    el.innerHTML = `<div class="chat-empty">Envie uma mensagem.<br>Respondemos rápido.</div>`;
     return;
   }
 
   el.innerHTML = msgs.map(([k, m]) => {
     const isOut = m.de === 'cliente';
     const hora = m.ts ? new Date(m.ts).toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'}) : '';
+    const imgHtml = m.imagem
+      ? `<img src="${m.imagem}" onclick="window.__openChatImg(this.src)" alt="">`
+      : '';
+    const txtHtml = m.texto ? escapeHtml(m.texto).replace(/\n/g, '<br>') : '';
     return `
       <div class="chat-msg ${isOut ? 'out' : 'in'}">
-        <div class="chat-bubble">${escapeHtml(m.texto || '').replace(/\n/g, '<br>')}</div>
+        <div class="chat-bubble">${imgHtml}${txtHtml}</div>
         <span class="chat-time">${hora}</span>
       </div>
     `;
@@ -1337,6 +1795,7 @@ function renderChat(){
 
   el.scrollTop = el.scrollHeight;
 }
+window.__openChatImg = openImg;
 
 async function sendChat(){
   const input = $('chatInput');
@@ -1353,22 +1812,55 @@ async function sendChat(){
     const base = ref(db, 'chats/' + CLIENTE_ID);
     const snap = await get(base);
     const cur = snap.val() || {};
-    const naoLidas = (cur.naoLidasSuporte || 0) + 1;
-
     await update(base, {
       clienteNome: nome,
       clienteEmail: email,
       ultimaMensagem: texto,
       ultimaTs: Date.now(),
-      naoLidasSuporte: naoLidas
+      naoLidasSuporte: (cur.naoLidasSuporte || 0) + 1
     });
 
     input.value = '';
   } catch(err){
     console.error(err);
-    showToast('Erro ao enviar mensagem.', 'error');
+    showToast('Erro ao enviar.', 'error');
   }
 }
+window.sendChat = sendChat;
+
+/* chat imagem upload */
+$('chatImgBtn').addEventListener('click', () => $('chatImgFile').click());
+$('chatImgFile').addEventListener('change', async (e) => {
+  const file = e.target.files && e.target.files[0];
+  if (!file) return;
+
+  try {
+    const base64 = await fileToBase64(file, 5);
+    const nome = localStorage.getItem('nexusNome') || 'Cliente';
+    const email = localStorage.getItem('nexusEmail') || '';
+
+    const msgRef = push(ref(db, 'chats/' + CLIENTE_ID + '/mensagens'));
+    await set(msgRef, { de: 'cliente', imagem: base64, ts: Date.now() });
+
+    const base = ref(db, 'chats/' + CLIENTE_ID);
+    const snap = await get(base);
+    const cur = snap.val() || {};
+    await update(base, {
+      clienteNome: nome,
+      clienteEmail: email,
+      ultimaMensagem: '📷 Imagem',
+      ultimaTs: Date.now(),
+      naoLidasSuporte: (cur.naoLidasSuporte || 0) + 1
+    });
+
+    showToast('Imagem enviada!', 'success');
+    e.target.value = '';
+  } catch(err){
+    console.error(err);
+    showToast(typeof err === 'string' ? err : 'Erro ao enviar imagem.', 'error');
+    e.target.value = '';
+  }
+});
 
 /* BADGES */
 function updateBadges(){
@@ -1384,10 +1876,6 @@ function updateBadges(){
   bMsg.textContent = unreadOrders;
   bMsg.classList.toggle('show', unreadOrders > 0);
 
-  const bChat = $('badgeChat');
-  bChat.textContent = unreadChat;
-  bChat.classList.toggle('show', unreadChat > 0);
-
   const bFab = $('fabBadge');
   bFab.textContent = unreadChat;
   bFab.classList.toggle('show', unreadChat > 0);
@@ -1401,37 +1889,48 @@ function closeAll(){
   $('deliveryModal').classList.remove('open');
   $('overlay').classList.remove('active');
 }
+window.closeAll = closeAll;
+
 function openCart(){
   closeAll();
   renderCart();
   $('cartPanel').classList.add('open');
   $('overlay').classList.add('active');
 }
+window.openCart = openCart;
+
 function openMessages(){
   closeAll();
   renderMessages();
   $('messagesPanel').classList.add('open');
   $('overlay').classList.add('active');
 }
+window.openMessages = openMessages;
+
 function openChat(){
   closeAll();
   renderChat();
   $('chatPanel').classList.add('open');
   $('overlay').classList.add('active');
-
   if (chatData && (chatData.naoLidasCliente || 0) > 0){
     update(ref(db, 'chats/' + CLIENTE_ID), { naoLidasCliente: 0 }).catch(console.error);
   }
 }
+window.openChat = openChat;
 
-/* EVENTOS */
+/* eventos */
 $('btnCart').addEventListener('click', openCart);
 $('btnMessages').addEventListener('click', openMessages);
-$('btnChat').addEventListener('click', openChat);
 $('overlay').addEventListener('click', closeAll);
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); });
 
-/* LISTENERS FIREBASE */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape'){
+    if ($('productModal').classList.contains('open')) closeProduct();
+    else closeAll();
+  }
+});
+
+/* listeners firebase */
 onValue(ref(db, 'produtos'), snap => {
   produtos = [];
   snap.forEach(c => produtos.push({ id: c.key, ...c.val() }));
@@ -1440,7 +1939,7 @@ onValue(ref(db, 'produtos'), snap => {
   if ($('cartPanel').classList.contains('open')) renderCart();
 }, err => {
   console.error(err);
-  $('produtosGrid').innerHTML = `<div class="empty-state">Erro ao carregar produtos.</div>`;
+  $('produtosGrid').innerHTML = `<div class="empty-state">Erro ao carregar.</div>`;
 });
 
 onValue(ref(db, 'pix'), snap => {
@@ -1467,19 +1966,9 @@ onValue(ref(db, 'chats/' + CLIENTE_ID), snap => {
   if ($('chatPanel').classList.contains('open')) renderChat();
 }, console.error);
 
-/* INIT */
+/* init */
 renderCart();
 updateBadges();
-
-window.addToCart = addToCart;
-window.changeQty = changeQty;
-window.removeItem = removeItem;
-window.openCart = openCart;
-window.openMessages = openMessages;
-window.openChat = openChat;
-window.closeAll = closeAll;
-window.closeDelivery = closeDelivery;
-window.sendChat = sendChat;
 </script>
 </body>
 </html>
